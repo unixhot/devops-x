@@ -6,8 +6,13 @@
 # Description:  Docker Registry Install
 #********************************************
 
+#Shell variables
 . /etc/init.d/functions
 . /etc/profile
+
+usage(){
+echo $"Usage: $0 [ deploy ]"
+}
 
 docker-registry-install(){
     docker --version
@@ -60,7 +65,6 @@ push-images(){
         echo "$localregistry"
         docker push $localregistry
         done
-
 }
 
 helm-install(){
@@ -89,14 +93,20 @@ charts-install(){
 }
 
 main(){
-    docker-registry-install;
-    nfs-server-install;
-    push-images;
-    tiller-install;
-    charts-install;
+  case $1 in
+    deploy)
+    	docker-registry-install;
+    	nfs-server-install;
+    	push-images;
+        helm-install;
+    	tiller-install;
+    	charts-install;
+                ;;
+    *) usage
+        exit 1;
+  esac
 }
 
-
-main 
+main $1
 
 

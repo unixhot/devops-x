@@ -31,7 +31,7 @@
 ### 3.执行安装脚本
 ```
 [root@linux-node1 ~]# cd devops-x
-[root@linux-node1 devops-x]# ./install.sh 
+[root@linux-node1 devops-x]# ./install.sh deploy
 ```
 
 ### 4.配置访问解析
