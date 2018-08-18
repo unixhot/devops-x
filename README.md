@@ -1,4 +1,4 @@
-# DevOps-X 基于Kubernetes的全开源DevOps部署流水线工具链
+# DevOps-X 基于Kubernetes的全开源DevOps工具链
 
 - 使用SaltStack进行基础设施自动化
 - 使用NFS/Ceph进行数据存储
