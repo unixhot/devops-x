@@ -1,0 +1,135 @@
+{{- define "smtp_config" -}}
+{{ if .Values.config.SMTP_ENABLED -}}
+SMTP_ENABLED: {{ .Values.config.SMTP_ENABLED | quote }}
+{{- end }}
+{{ if .Values.config.SMTP_DOMAIN -}}
+SMTP_DOMAIN: {{ .Values.config.SMTP_DOMAIN | quote }}
+{{- end }}
+{{ if .Values.config.SMTP_HOST -}}
+SMTP_HOST: {{ .Values.config.SMTP_HOST | quote }}
+{{- end }}
+{{ if .Values.config.SMTP_PORT -}}
+SMTP_PORT: {{ .Values.config.SMTP_PORT | quote }}
+{{- end }}
+{{ if .Values.config.SMTP_USER -}}
+SMTP_USER: {{ .Values.config.SMTP_USER | quote }}
+{{- end }}
+{{ if .Values.config.SMTP_PASS -}}
+SMTP_PASS: {{ .Values.config.SMTP_PASS | quote }}
+{{- end }}
+{{ if .Values.config.SMTP_STARTTLS -}}
+SMTP_STARTTLS: {{ .Values.config.SMTP_STARTTLS | quote }}
+{{- end }}
+{{ if .Values.config.SMTP_TLS -}}
+SMTP_TLS: {{ .Values.config.SMTP_TLS | quote }}
+{{- end }}
+{{ if .Values.config.SMTP_OPENSSL_VERIFY_MODE -}}
+SMTP_OPENSSL_VERIFY_MODE: {{ .Values.config.SMTP_OPENSSL_VERIFY_MODE | quote }}
+{{- end }}
+{{ if .Values.config.SMTP_AUTHENTICATION -}}
+SMTP_AUTHENTICATION: {{ .Values.config.SMTP_AUTHENTICATION | quote }}
+{{- end }}
+{{ if .Values.config.SMTP_CA_ENABLED -}}
+SMTP_CA_ENABLED: {{ .Values.config.SMTP_CA_ENABLED | quote }}
+{{- end }}
+{{ if .Values.config.SMTP_CA_PATH -}}
+SMTP_CA_PATH: {{ .Values.config.SMTP_CA_PATH | quote }}
+{{- end }}
+{{ if .Values.config.SMTP_CA_FILE -}}
+SMTP_CA_FILE: {{ .Values.config.SMTP_CA_FILE | quote }}
+{{- end }}
+{{- end }}
+
+{{- define "smtp_data" -}}
+{{ if .Values.config.SMTP_ENABLED -}}
+- name: SMTP_ENABLED
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SMTP_ENABLED
+{{- end }}
+{{ if .Values.config.SMTP_DOMAIN -}}
+- name: SMTP_DOMAIN
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SMTP_DOMAIN
+{{- end }}
+{{ if .Values.config.SMTP_HOST -}}
+- name: SMTP_HOST
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SMTP_HOST
+{{- end }}
+{{ if .Values.config.SMTP_PORT -}}
+- name: SMTP_PORT
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SMTP_PORT
+{{- end }}
+{{ if .Values.config.SMTP_USER -}}
+- name: SMTP_USER
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SMTP_USER
+{{- end }}
+{{ if .Values.config.SMTP_PASS -}}
+- name: SMTP_PASS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SMTP_PASS
+{{- end }}
+{{ if .Values.config.SMTP_STARTTLS -}}
+- name: SMTP_STARTTLS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SMTP_STARTTLS
+{{- end }}
+{{ if .Values.config.SMTP_TLS -}}
+- name: SMTP_TLS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SMTP_TLS
+{{- end }}
+{{ if .Values.config.SMTP_OPENSSL_VERIFY_MODE -}}
+- name: SMTP_OPENSSL_VERIFY_MODE
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SMTP_OPENSSL_VERIFY_MODE
+{{- end }}
+{{ if .Values.config.SMTP_AUTHENTICATION -}}
+- name: SMTP_AUTHENTICATION
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SMTP_AUTHENTICATION
+{{- end }}
+{{ if .Values.config.SMTP_CA_ENABLED -}}
+- name: SMTP_CA_ENABLED
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SMTP_CA_ENABLED
+{{- end }}
+{{ if .Values.config.SMTP_CA_PATH -}}
+- name: SMTP_CA_PATH
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SMTP_CA_PATH
+{{- end }}
+{{ if .Values.config.SMTP_CA_FILE -}}
+- name: SMTP_CA_FILE
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SMTP_CA_FILE
+{{- end }}
+{{- end }}

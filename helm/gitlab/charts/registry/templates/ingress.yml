@@ -1,0 +1,36 @@
+{{- if .Values.ingress.enabled -}}
+{{- $releaseName := .Release.Name -}}
+{{- $servicePort := .Values.httpPort -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+  {{- range $key, $value := .Values.ingress.annotations }}
+    {{ $key }}: {{ $value | quote }}
+  {{- end }}
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    heritage: "{{ .Release.Service }}"
+    release: "{{ .Release.Name }}"
+  name: {{ template "fullname" . }}
+spec:
+  rules:
+  {{- range .Values.ingress.hosts }}
+    - host: {{ . }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ printf "%s-%s" $releaseName "registry" | trunc 63 }}
+              servicePort: {{ $servicePort }}
+  {{ end }}
+
+  tls:
+    - secretName: {{ default "registry-server-tls" .Values.ingress.secretName }}
+      hosts:
+      {{- range .Values.ingress.hosts }}
+        - {{ . }}
+      {{ end }}
+
+{{- end -}}

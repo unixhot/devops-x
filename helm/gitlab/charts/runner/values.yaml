@@ -1,0 +1,55 @@
+## GitLab image
+## ref: https://hub.docker.com/r/gitlab/gitlab-runner/
+##
+image: gitlab/gitlab-runner
+
+## Gitlab image version
+## ref: https://hub.docker.com/r/gitlab/gitlab-runner/tags/
+##
+imageTag: "v1.11.0"
+
+## Specify a imagePullPolicy
+## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
+## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+##
+# imagePullPolicy:
+
+## Configure resource requests and limits
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+##
+resources:
+  ## GitLab requires a good deal of resources. We have split out Postgres and
+  ## redis, which helps some. Refer to the guidelines for larger installs.
+  ## ref: https://docs.gitlab.com/ce/install/requirements.html#hardware-requirements
+  requests:
+    memory: 500Mi
+    cpu: 500m
+  limits:
+    memory: 500Mi
+    cpu: 500m
+
+
+# gitlabUrl: "https://gitlab.example.com/ci/"
+# token: ""
+# registrationToken: ""
+
+# sentryDSN: ""
+# metricsServer: ""
+
+executor:
+  type: "docker"
+  tlsVerify: "false"
+  image: "docker:latest"
+  privileged: "true"
+  volumes:
+   - "/cache"
+   - "/var/run/docker.sock:/var/run/docker.sock"
+   - "/usr/bin/docker:/usr/bin/docker"
+
+cache:
+  enabled: false
+  type: "s3"
+#  serverAddress: ""
+#  accessKey: ""
+#  secretKey: ""
+#  bucketName: ""

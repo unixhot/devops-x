@@ -1,0 +1,75 @@
+{{- define "nginx_config" -}}
+{{ if .Values.config.NGINX_WORKERS -}}
+NGINX_WORKERS: {{ .Values.config.NGINX_WORKERS | quote }}
+{{- end }}
+{{ if .Values.config.NGINX_SERVER_NAMES_HASH_BUCKET_SIZE -}}
+NGINX_SERVER_NAMES_HASH_BUCKET_SIZE: {{ .Values.config.NGINX_SERVER_NAMES_HASH_BUCKET_SIZE | quote }}
+{{- end }}
+{{ if .Values.config.NGINX_HSTS_ENABLED -}}
+NGINX_HSTS_ENABLED: {{ .Values.config.NGINX_HSTS_ENABLED | quote }}
+{{- end }}
+{{ if .Values.config.NGINX_HSTS_MAXAGE -}}
+NGINX_HSTS_MAXAGE: {{ .Values.config.NGINX_HSTS_MAXAGE | quote }}
+{{- end }}
+{{ if .Values.config.NGINX_PROXY_BUFFERING -}}
+NGINX_PROXY_BUFFERING: {{ .Values.config.NGINX_PROXY_BUFFERING | quote }}
+{{- end }}
+{{ if .Values.config.NGINX_ACCEL_BUFFERING -}}
+NGINX_ACCEL_BUFFERING: {{ .Values.config.NGINX_ACCEL_BUFFERING | quote }}
+{{- end }}
+{{ if .Values.config.NGINX_X_FORWARDED_PROTO -}}
+NGINX_X_FORWARDED_PROTO: {{ .Values.config.NGINX_X_FORWARDED_PROTO | quote }}
+{{- end }}
+{{- end }}
+
+{{- define "nginx_data" -}}
+{{ if .Values.config.NGINX_WORKERS -}}
+- name: NGINX_WORKERS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: NGINX_WORKERS
+{{- end }}
+{{ if .Values.config.NGINX_SERVER_NAMES_HASH_BUCKET_SIZE -}}
+- name: NGINX_SERVER_NAMES_HASH_BUCKET_SIZE
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: NGINX_SERVER_NAMES_HASH_BUCKET_SIZE
+{{- end }}
+{{ if .Values.config.NGINX_HSTS_ENABLED -}}
+- name: NGINX_HSTS_ENABLED
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: NGINX_HSTS_ENABLED
+{{- end }}
+{{ if .Values.config.NGINX_HSTS_MAXAGE -}}
+- name: NGINX_HSTS_MAXAGE
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: NGINX_HSTS_MAXAGE
+{{- end }}
+{{ if .Values.config.NGINX_PROXY_BUFFERING -}}
+- name: NGINX_PROXY_BUFFERING
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: NGINX_PROXY_BUFFERING
+{{- end }}
+{{ if .Values.config.NGINX_ACCEL_BUFFERING -}}
+- name: NGINX_ACCEL_BUFFERING
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: NGINX_ACCEL_BUFFERING
+{{- end }}
+{{ if .Values.config.NGINX_X_FORWARDED_PROTO -}}
+- name: NGINX_X_FORWARDED_PROTO
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: NGINX_X_FORWARDED_PROTO
+{{- end }}
+{{- end }}

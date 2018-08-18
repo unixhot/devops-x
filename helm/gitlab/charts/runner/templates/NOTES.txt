@@ -1,0 +1,33 @@
+{{ if .Values.token }}
+{{ else }}
+##############################################################################
+## WARNING: Runner token was not provided.                                  ##
+##############################################################################
+
+This deployment will be incomplete until you provide the token for the runner
+
+To get one you need to run registrator and provede token to `helm install`
+
+{{ if .Values.registrationToken }}
+{{ else }}
+# Get registration token from {{.Values.gitlabUrl}}/namespace/project/runners page
+{{ end }}
+# Register the runner using registration token
+
+kubectl run -it runner-registrator \
+    --image="{{ .Values.image }}:{{ .Values.imageTag }}" --restart=Never -- register \
+    --non-interactive \
+    --url https://{{ .Values.gitlabUrl }}/ci/ \
+    --registration-token {{ .Values.registrationToken | quote}} \
+    --executor "{{ .Values.executor.type }}" \
+    --name "{{ template "fullname" . }}" \
+    --docker-image "ubuntu"
+
+# Get runnner token from {{.Values.gitlabUrl}}/namespace/project/runners page
+
+# Upgrade release with the token
+
+    helm upgrade {{ .Release.Name }} \
+        --set token=<your-token>
+
+{{ end }}

@@ -1,0 +1,51 @@
+{{ if not .Values.token }}
+{{ if .Values.registrationToken }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" . }}
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+        release: "{{ .Release.Name }}"
+        heritage: "{{ .Release.Service }}"
+      annotations:
+        pod.beta.kubernetes.io/init-containers: '[
+              {
+                  "name": "wait-for-gitlab",
+                  "image": "appropriate/curl:latest",
+                  "command": ["/bin/sh", "-c", "while ! curl --output /dev/null --silent --head --fail {{ .Values.gitlabUrl }}; do sleep 1 && echo -n .; done"],
+                  "imagePullPolicy": {{ default "Always" .Values.imagePullPolicy | quote }}
+              }
+          ]'
+
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: {{ template "fullname" . }}
+        image: "{{ .Values.image }}:{{ .Values.imageTag }}"
+        imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+        command: ["/usr/bin/gitlab-ci-multi-runner"]
+        args:
+          - register
+          - --non-interactive
+          - --url
+          - {{ .Values.gitlabUrl | quote }}
+          - --registration-token
+          - {{ .Values.registrationToken | quote}}
+          - --executor
+          - {{ .Values.executor.type | quote }}
+          - --name
+          - {{ template "fullname" . }}
+          - --docker-image
+          - ubuntu
+{{ end }}
+{{ end }}

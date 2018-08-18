@@ -1,0 +1,8 @@
+name: plugins
+version: 1.0.0
+description: Install plugins for kubernetes
+maintainers:
+- name: Dinnawin
+  email: dinnawin@gmail.com
+icon: ""
+

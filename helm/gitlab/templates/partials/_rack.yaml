@@ -1,0 +1,55 @@
+{{- define "rack_config" -}}
+{{ if .Values.config.RACK_ATTACK_ENABLED -}}
+RACK_ATTACK_ENABLED: {{ .Values.config.RACK_ATTACK_ENABLED | quote }}
+{{- end }}
+{{ if .Values.config.RACK_ATTACK_WHITELIST -}}
+RACK_ATTACK_WHITELIST: {{ .Values.config.RACK_ATTACK_WHITELIST | quote }}
+{{- end }}
+{{ if .Values.config.RACK_ATTACK_MAXRETRY -}}
+RACK_ATTACK_MAXRETRY: {{ .Values.config.RACK_ATTACK_MAXRETRY | quote }}
+{{- end }}
+{{ if .Values.config.RACK_ATTACK_FINDTIME -}}
+RACK_ATTACK_FINDTIME: {{ .Values.config.RACK_ATTACK_FINDTIME | quote }}
+{{- end }}
+{{ if .Values.config.RACK_ATTACK_BANTIME -}}
+RACK_ATTACK_BANTIME: {{ .Values.config.RACK_ATTACK_BANTIME | quote }}
+{{- end }}
+{{- end }}
+
+{{- define "rack_data" -}}
+{{ if .Values.config.RACK_ATTACK_ENABLED -}}
+- name: RACK_ATTACK_ENABLED
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: RACK_ATTACK_ENABLED
+{{- end }}
+{{ if .Values.config.RACK_ATTACK_WHITELIST -}}
+- name: RACK_ATTACK_WHITELIST
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: RACK_ATTACK_WHITELIST
+{{- end }}
+{{ if .Values.config.RACK_ATTACK_MAXRETRY -}}
+- name: RACK_ATTACK_MAXRETRY
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: RACK_ATTACK_MAXRETRY
+{{- end }}
+{{ if .Values.config.RACK_ATTACK_FINDTIME -}}
+- name: RACK_ATTACK_FINDTIME
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: RACK_ATTACK_FINDTIME
+{{- end }}
+{{ if .Values.config.RACK_ATTACK_BANTIME -}}
+- name: RACK_ATTACK_BANTIME
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: RACK_ATTACK_BANTIME
+{{- end }}
+{{- end }}

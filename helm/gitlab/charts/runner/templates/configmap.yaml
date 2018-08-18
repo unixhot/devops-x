@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+data:
+  config.toml: |
+    concurrent = {{ default "4" .Values.concurrent }}
+    check_interval = {{ default "1" .Values.concurrent }}
+    {{ if .Values.sentryDSN -}}
+    sentry_dsn = "{{ .Values.sentryDSN }}"
+    {{ end -}}
+    {{ if .Values.metricsServer -}}
+    metrics_server = {{ .Values.metricsServer -}}
+    {{ end -}}
+
+    [[runners]]
+      name = "{{ template "fullname" . }}"
+      url = {{ .Values.gitlabUrl | quote }}
+      token = {{ .Values.token | quote }}
+      executor = {{ default "docker" .Values.executor.type | quote}}
+      [runners.docker]
+        tls_verify = {{ .Values.executor.tlsVerify }}
+        image = {{ .Values.executor.image | quote }}
+        privileged = {{ .Values.executor.privileged }}
+        volumes = [{{ template "volumesList" . }}]
+      {{ if .Values.cache.enabled -}}
+      [runners.cache]
+        Type = {{ .Values.cache.type | quote }}
+        ServerAddress = "{{ template "minio.fullname" . }}:9000"
+        AccessKey = {{ .Values.cache.accessKey | quote }}
+        SecretKey = {{ .Values.cache.secretKey | quote }}
+        BucketName = {{ default "runner" .Values.cache.bucketName | quote }}
+      {{- end }}

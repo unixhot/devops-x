@@ -1,0 +1,96 @@
+
+{{- define "email_config" -}}
+{{ if .Values.config.GITLAB_EMAIL -}}
+GITLAB_EMAIL: {{ .Values.config.GITLAB_EMAIL | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_EMAIL_DISPLAY_NAME -}}
+GITLAB_EMAIL_DISPLAY_NAME: {{ .Values.config.GITLAB_EMAIL_DISPLAY_NAME | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_EMAIL_REPLY_TO -}}
+GITLAB_EMAIL_REPLY_TO: {{ .Values.config.GITLAB_EMAIL_REPLY_TO | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_EMAIL_SUBJECT_SUFFIX -}}
+GITLAB_EMAIL_SUBJECT_SUFFIX: {{ .Values.config.GITLAB_EMAIL_SUBJECT_SUFFIX | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_EMAIL_ENABLED -}}
+GITLAB_EMAIL_ENABLED: {{ .Values.config.GITLAB_EMAIL_ENABLED | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_INCOMING_EMAIL_ADDRESS -}}
+GITLAB_INCOMING_EMAIL_ADDRESS: {{ .Values.config.GITLAB_INCOMING_EMAIL_ADDRESS | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_INCOMING_EMAIL_ENABLED -}}
+GITLAB_INCOMING_EMAIL_ENABLED: {{ .Values.config.GITLAB_INCOMING_EMAIL_ENABLED | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_NOTIFY_ON_BROKEN_BUILDS -}}
+GITLAB_NOTIFY_ON_BROKEN_BUILDS: {{ .Values.config.GITLAB_NOTIFY_ON_BROKEN_BUILDS | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_NOTIFY_PUSHER -}}
+GITLAB_NOTIFY_PUSHER: {{ .Values.config.GITLAB_NOTIFY_PUSHER | quote }}
+{{- end }}
+{{- end }}
+
+{{- define "email_data" -}}
+{{ if .Values.config.GITLAB_EMAIL -}}
+- name: GITLAB_EMAIL
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_EMAIL
+{{- end }}
+{{ if .Values.config.GITLAB_EMAIL_DISPLAY_NAME -}}
+- name: GITLAB_EMAIL_DISPLAY_NAME
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_EMAIL_DISPLAY_NAME
+{{- end }}
+{{ if .Values.config.GITLAB_EMAIL_REPLY_TO -}}
+- name: GITLAB_EMAIL_REPLY_TO
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_EMAIL_REPLY_TO
+{{- end }}
+{{ if .Values.config.GITLAB_EMAIL_SUBJECT_SUFFIX -}}
+- name: GITLAB_EMAIL_SUBJECT_SUFFIX
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_EMAIL_SUBJECT_SUFFIX
+{{- end }}
+{{ if .Values.config.GITLAB_EMAIL_ENABLED -}}
+- name: GITLAB_EMAIL_ENABLED
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_EMAIL_ENABLED
+{{- end }}
+{{ if .Values.config.GITLAB_INCOMING_EMAIL_ADDRESS -}}
+- name: GITLAB_INCOMING_EMAIL_ADDRESS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_INCOMING_EMAIL_ADDRESS
+{{- end }}
+{{ if .Values.config.GITLAB_INCOMING_EMAIL_ENABLED -}}
+- name: GITLAB_INCOMING_EMAIL_ENABLED
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_INCOMING_EMAIL_ENABLED
+{{- end }}
+{{ if .Values.config.GITLAB_NOTIFY_ON_BROKEN_BUILDS -}}
+- name: GITLAB_NOTIFY_ON_BROKEN_BUILDS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_NOTIFY_ON_BROKEN_BUILDS
+{{- end }}
+{{ if .Values.config.GITLAB_NOTIFY_PUSHER -}}
+- name: GITLAB_NOTIFY_PUSHER
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_NOTIFY_PUSHER
+{{- end }}
+{{- end }}

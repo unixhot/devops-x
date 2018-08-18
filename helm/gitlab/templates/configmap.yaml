@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+data:
+  DEBUG: {{ default "false" .Values.config.DEBUG | quote }}
+
+  GITLAB_HOST: {{ .Values.config.GITLAB_HOST | quote }}
+  GITLAB_PORT: {{ .Values.config.GITLAB_PORT | quote }}
+
+  GITLAB_ROOT_EMAIL: {{ .Values.config.GITLAB_ROOT_EMAIL | quote }}
+
+  REDIS_PORT: {{ default "6379" .Values.config.REDIS_PORT | quote }}
+  REDIS_DB_NUMBER: {{ default "0" .Values.config.REDIS_DB_NUMBER | quote }}
+
+  DB_ADAPTER: {{ default "postgresql" .Values.config.DB_ADAPTER | quote }}
+  DB_ENCODING: {{ default "utf8" .Values.config.DB_ENCODING | quote }}
+  DB_PORT: {{ default "5432" .Values.config.DB_PORT | quote }}
+  DB_NAME: {{ default "gitlab_production" .Values.config.DB_NAME | quote }}
+  DB_POOL: {{ default "10" .Values.config.DB_POOL | quote }}
+  {{ if .Values.config.GITLAB_SHARED_RUNNERS_REGISTRATION_TOKEN }}
+  GITLAB_SHARED_RUNNERS_REGISTRATION_TOKEN: {{ .Values.config.GITLAB_SHARED_RUNNERS_REGISTRATION_TOKEN | quote}}
+  {{- end }}
+  {{ if .Values.config.GITLAB_TIMEZONE -}}
+  GITLAB_TIMEZONE: {{ .Values.config.GITLAB_TIMEZONE | quote }}
+  {{- end }}
+  {{ if .Values.config.GITLAB_SSH_HOST -}}
+  GITLAB_SSH_HOST: {{ .Values.config.GITLAB_SSH_HOST | quote }}
+  {{- end }}
+  {{ if .Values.config.GITLAB_SSH_PORT -}}
+  GITLAB_SSH_PORT: {{ .Values.config.GITLAB_SSH_PORT | quote }}
+  {{- end }}
+  {{ if .Values.config.GITLAB_RELATIVE_URL_ROOT -}}
+  GITLAB_RELATIVE_URL_ROOT: {{ .Values.config.GITLAB_RELATIVE_URL_ROOT | quote }}
+  {{- end }}
+  {{ if .Values.config.GITLAB_TRUSTED_PROXIES -}}
+  GITLAB_TRUSTED_PROXIES: {{ .Values.config.GITLAB_TRUSTED_PROXIES | quote }}
+  {{- end }}
+  {{ if .Values.config.GITLAB_HTTPS -}}
+  GITLAB_HTTPS: {{ .Values.config.GITLAB_HTTPS | quote }}
+  {{- end }}
+
+{{ include "backup_config" . | indent 2 }}
+{{ include "email_config" . | indent 2 }}
+{{ include "ssl_config" . | indent 2 }}
+{{ include "registry_config" . | indent 2 }}
+{{ include "nginx_config" . | indent 2 }}
+{{ include "smtp_config" . | indent 2 }}
+{{ include "imap_config" . | indent 2 }}
+{{ include "ldap_config" . | indent 2 }}
+{{ include "oauth_config" . | indent 2 }}
+{{ include "aws_backup_config" . | indent 2 }}
+{{ include "gcs_backup_config" . | indent 2 }}
+{{ include "rack_config" . | indent 2 }}
+{{ include "advanced_config" . | indent 2 }}
+{{ include "pages_config" . | indent 2 }}
+

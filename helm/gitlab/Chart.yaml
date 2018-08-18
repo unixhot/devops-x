@@ -1,0 +1,18 @@
+description: GitLab Community Edition
+home: https://about.gitlab.com
+icon: https://gitlab.com/uploads/group/avatar/6543/gitlab-logo-square.png
+keywords:
+- git
+- ci
+- deploy
+- issue tracker
+- code review
+- wiki
+maintainers:
+- email: ipaq.lw@gmail.com
+  name: Sergey Nuzhdin
+name: gitlab
+sources:
+- https://hub.docker.com/r/sameersbn/gitlab
+- https://github.com/sameersbn/docker-gitlab
+version: 0.2.8

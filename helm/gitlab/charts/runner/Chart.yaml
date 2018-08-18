@@ -1,0 +1,14 @@
+description: GitLab-ci runner
+home: https://about.gitlab.com
+icon: https://gitlab.com/uploads/group/avatar/6543/gitlab-logo-square.png
+keywords:
+- git
+- ci
+- deploy
+maintainers:
+- email: ipaq.lw@gmail.com
+  name: Sergey Nuzhdin
+name: runner
+sources:
+- https://hub.docker.com/r/gitlab/gitlab-runner/
+version: 0.3.0

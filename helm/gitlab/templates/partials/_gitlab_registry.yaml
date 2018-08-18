@@ -1,0 +1,75 @@
+{{- define "registry_config" -}}
+{{ if .Values.config.GITLAB_REGISTRY_ENABLED -}}
+GITLAB_REGISTRY_ENABLED: {{ .Values.config.GITLAB_REGISTRY_ENABLED | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_REGISTRY_HOST -}}
+GITLAB_REGISTRY_HOST: {{ .Values.config.GITLAB_REGISTRY_HOST | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_REGISTRY_PORT -}}
+GITLAB_REGISTRY_PORT: {{ .Values.config.GITLAB_REGISTRY_PORT | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_REGISTRY_API_URL -}}
+GITLAB_REGISTRY_API_URL: {{ .Values.config.GITLAB_REGISTRY_API_URL | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_REGISTRY_KEY_PATH -}}
+GITLAB_REGISTRY_KEY_PATH: {{ .Values.config.GITLAB_REGISTRY_KEY_PATH | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_REGISTRY_DIR -}}
+GITLAB_REGISTRY_DIR: {{ .Values.config.GITLAB_REGISTRY_DIR | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_REGISTRY_ISSUER -}}
+GITLAB_REGISTRY_ISSUER: {{ .Values.config.GITLAB_REGISTRY_ISSUER | quote }}
+{{- end }}
+{{- end }}
+
+{{- define "registry_data" -}}
+{{ if .Values.config.GITLAB_REGISTRY_ENABLED -}}
+- name: GITLAB_REGISTRY_ENABLED
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_REGISTRY_ENABLED
+{{- end }}
+{{ if .Values.config.GITLAB_REGISTRY_HOST -}}
+- name: GITLAB_REGISTRY_HOST
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_REGISTRY_HOST
+{{- end }}
+{{ if .Values.config.GITLAB_REGISTRY_PORT -}}
+- name: GITLAB_REGISTRY_PORT
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_REGISTRY_PORT
+{{- end }}
+{{ if .Values.config.GITLAB_REGISTRY_API_URL -}}
+- name: GITLAB_REGISTRY_API_URL
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_REGISTRY_API_URL
+{{- end }}
+{{ if .Values.config.GITLAB_REGISTRY_KEY_PATH -}}
+- name: GITLAB_REGISTRY_KEY_PATH
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_REGISTRY_KEY_PATH
+{{- end }}
+{{ if .Values.config.GITLAB_REGISTRY_DIR -}}
+- name: GITLAB_REGISTRY_DIR
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_REGISTRY_DIR
+{{- end }}
+{{ if .Values.config.GITLAB_REGISTRY_ISSUER -}}
+- name: GITLAB_REGISTRY_ISSUER
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_REGISTRY_ISSUER
+{{- end }}
+{{- end }}

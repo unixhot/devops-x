@@ -1,0 +1,96 @@
+{{- define "pages_config" -}}
+{{ if .Values.config.GITLAB_PAGES_ENABLED -}}
+GITLAB_PAGES_ENABLED: {{ .Values.config.GITLAB_PAGES_ENABLED | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_PAGES_DOMAIN -}}
+GITLAB_PAGES_DOMAIN: {{ .Values.config.GITLAB_PAGES_DOMAIN | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_PAGES_DIR -}}
+GITLAB_PAGES_DIR: {{ .Values.config.GITLAB_PAGES_DIR | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_PAGES_PORT -}}
+GITLAB_PAGES_PORT: {{ .Values.config.GITLAB_PAGES_PORT | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_PAGES_HTTPS -}}
+GITLAB_PAGES_HTTPS: {{ .Values.config.GITLAB_PAGES_HTTPS | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_PAGES_EXTERNAL_HTTP -}}
+GITLAB_PAGES_EXTERNAL_HTTP: {{ .Values.config.GITLAB_PAGES_EXTERNAL_HTTP | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_PAGES_EXTERNAL_HTTPS -}}
+GITLAB_PAGES_EXTERNAL_HTTPS: {{ .Values.config.GITLAB_PAGES_EXTERNAL_HTTPS | quote }}
+{{- end }}
+{{ if .Values.config.SSL_PAGES_KEY_PATH -}}
+SSL_PAGES_KEY_PATH: {{ .Values.config.SSL_PAGES_KEY_PATH | quote }}
+{{- end }}
+{{ if .Values.config.SSL_PAGES_CERT_PATH -}}
+SSL_PAGES_CERT_PATH: {{ .Values.config.SSL_PAGES_CERT_PATH | quote }}
+{{- end }}
+{{- end }}
+
+
+{{- define "pages_data" -}}
+{{ if .Values.config.GITLAB_PAGES_ENABLED -}}
+- name: GITLAB_PAGES_ENABLED
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_PAGES_ENABLED
+{{- end }}
+{{ if .Values.config.GITLAB_PAGES_DOMAIN -}}
+- name: GITLAB_PAGES_DOMAIN
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_PAGES_DOMAIN
+{{- end }}
+{{ if .Values.config.GITLAB_PAGES_DIR -}}
+- name: GITLAB_PAGES_DIR
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_PAGES_DIR
+{{- end }}
+{{ if .Values.config.GITLAB_PAGES_PORT -}}
+- name: GITLAB_PAGES_PORT
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_PAGES_PORT
+{{- end }}
+{{ if .Values.config.GITLAB_PAGES_HTTPS -}}
+- name: GITLAB_PAGES_HTTPS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_PAGES_HTTPS
+{{- end }}
+{{ if .Values.config.GITLAB_PAGES_EXTERNAL_HTTP -}}
+- name: GITLAB_PAGES_EXTERNAL_HTTP
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_PAGES_EXTERNAL_HTTP
+{{- end }}
+{{ if .Values.config.GITLAB_PAGES_EXTERNAL_HTTPS -}}
+- name: GITLAB_PAGES_EXTERNAL_HTTPS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_PAGES_EXTERNAL_HTTPS
+{{- end }}
+{{ if .Values.config.SSL_PAGES_KEY_PATH -}}
+- name: SSL_PAGES_KEY_PATH
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SSL_PAGES_KEY_PATH
+{{- end }}
+{{ if .Values.config.SSL_PAGES_CERT_PATH -}}
+- name: SSL_PAGES_CERT_PATH
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SSL_PAGES_CERT_PATH
+{{- end }}
+{{- end }}

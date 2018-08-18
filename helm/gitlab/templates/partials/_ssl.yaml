@@ -1,0 +1,95 @@
+{{- define "ssl_config" -}}
+{{ if .Values.config.SSL_SELF_SIGNED -}}
+SSL_SELF_SIGNED: {{ .Values.config.SSL_SELF_SIGNED | quote }}
+{{- end }}
+{{ if .Values.config.SSL_CERTIFICATE_PATH -}}
+SSL_CERTIFICATE_PATH: {{ .Values.config.SSL_CERTIFICATE_PATH | quote }}
+{{- end }}
+{{ if .Values.config.SSL_KEY_PATH -}}
+SSL_KEY_PATH: {{ .Values.config.SSL_KEY_PATH | quote }}
+{{- end }}
+{{ if .Values.config.SSL_DHPARAM_PATH -}}
+SSL_DHPARAM_PATH: {{ .Values.config.SSL_DHPARAM_PATH | quote }}
+{{- end }}
+{{ if .Values.config.SSL_VERIFY_CLIENT -}}
+SSL_VERIFY_CLIENT: {{ .Values.config.SSL_VERIFY_CLIENT | quote }}
+{{- end }}
+{{ if .Values.config.SSL_CA_CERTIFICATES_PATH -}}
+SSL_CA_CERTIFICATES_PATH: {{ .Values.config.SSL_CA_CERTIFICATES_PATH | quote }}
+{{- end }}
+{{ if .Values.config.SSL_REGISTRY_KEY_PATH -}}
+SSL_REGISTRY_KEY_PATH: {{ .Values.config.SSL_REGISTRY_KEY_PATH | quote }}
+{{- end }}
+{{ if .Values.config.SSL_REGISTRY_CERT_PATH -}}
+SSL_REGISTRY_CERT_PATH: {{ .Values.config.SSL_REGISTRY_CERT_PATH | quote }}
+{{- end }}
+{{ if .Values.config.SSL_CIPHERS -}}
+SSL_CIPHERS: {{ .Values.config.SSL_CIPHERS | quote }}
+{{- end }}
+{{- end }}
+
+{{- define "ssl_data" -}}
+{{ if .Values.config.SSL_SELF_SIGNED -}}
+- name: SSL_SELF_SIGNED
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SSL_SELF_SIGNED
+{{- end }}
+{{ if .Values.config.SSL_CERTIFICATE_PATH -}}
+- name: SSL_CERTIFICATE_PATH
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SSL_CERTIFICATE_PATH
+{{- end }}
+{{ if .Values.config.SSL_KEY_PATH -}}
+- name: SSL_KEY_PATH
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SSL_KEY_PATH
+{{- end }}
+{{ if .Values.config.SSL_DHPARAM_PATH -}}
+- name: SSL_DHPARAM_PATH
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SSL_DHPARAM_PATH
+{{- end }}
+{{ if .Values.config.SSL_VERIFY_CLIENT -}}
+- name: SSL_VERIFY_CLIENT
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SSL_VERIFY_CLIENT
+{{- end }}
+{{ if .Values.config.SSL_CA_CERTIFICATES_PATH -}}
+- name: SSL_CA_CERTIFICATES_PATH
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SSL_CA_CERTIFICATES_PATH
+{{- end }}
+{{ if .Values.config.SSL_REGISTRY_KEY_PATH -}}
+- name: SSL_REGISTRY_KEY_PATH
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SSL_REGISTRY_KEY_PATH
+{{- end }}
+{{ if .Values.config.SSL_REGISTRY_CERT_PATH -}}
+- name: SSL_REGISTRY_CERT_PATH
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SSL_REGISTRY_CERT_PATH
+{{- end }}
+{{ if .Values.config.SSL_CIPHERS -}}
+- name: SSL_CIPHERS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: SSL_CIPHERS
+{{- end }}
+{{- end }}

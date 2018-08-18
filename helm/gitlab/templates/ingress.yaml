@@ -1,0 +1,41 @@
+{{- if .Values.ingress.enabled -}}
+{{- $releaseName := .Release.Name -}}
+{{- $servicePort := .Values.httpPort -}}
+{{- $relativePath := .Values.config.GITLAB_RELATIVE_URL_ROOT }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+  {{- range $key, $value := .Values.ingress.annotations }}
+    {{ $key }}: {{ $value | quote }}
+  {{- end }}
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    heritage: "{{ .Release.Service }}"
+    release: "{{ .Release.Name }}"
+  name: {{ template "fullname" . }}
+spec:
+  rules:
+  {{- range .Values.ingress.hosts }}
+    - host: {{ . }}
+      http:
+        paths:
+          - path: {{ default "/" $relativePath }}
+            backend:
+              serviceName: {{ printf "%s-%s" $releaseName "gitlab" | trunc 63 }}
+              servicePort: {{ $servicePort }}
+  {{- end }}
+    - host: {{ .Values.config.GITLAB_SSH_HOST }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ printf "%s-%s" $releaseName "gitlab" | trunc 63 }}
+              servicePort: {{ .Values.config.GITLAB_SSH_PORT }}
+
+  {{- if .Values.ingress.tls }}
+  tls:
+{{ toYaml .Values.ingress.tls | indent 4 }}
+  {{- end -}}
+{{- end -}}

@@ -1,0 +1,145 @@
+{{- define "ldap_config" -}}
+{{ if .Values.config.LDAP_ENABLED -}}
+LDAP_ENABLED: {{ .Values.config.LDAP_ENABLED | quote }}
+{{- end }}
+{{ if .Values.config.LDAP_LABEL -}}
+LDAP_LABEL: {{ .Values.config.LDAP_LABEL | quote }}
+{{- end }}
+{{ if .Values.config.LDAP_HOST -}}
+LDAP_HOST: {{ .Values.config.LDAP_HOST | quote }}
+{{- end }}
+{{ if .Values.config.LDAP_PORT -}}
+LDAP_PORT: {{ .Values.config.LDAP_PORT | quote }}
+{{- end }}
+{{ if .Values.config.LDAP_UID -}}
+LDAP_UID: {{ .Values.config.LDAP_UID | quote }}
+{{- end }}
+{{ if .Values.config.LDAP_METHOD -}}
+LDAP_METHOD: {{ .Values.config.LDAP_METHOD | quote }}
+{{- end }}
+{{ if .Values.config.LDAP_BIND_DN -}}
+LDAP_BIND_DN: {{ .Values.config.LDAP_BIND_DN | quote }}
+{{- end }}
+{{ if .Values.config.LDAP_PASS -}}
+LDAP_PASS: {{ .Values.config.LDAP_PASS | quote }}
+{{- end }}
+{{ if .Values.config.LDAP_TIMEOUT -}}
+LDAP_TIMEOUT: {{ .Values.config.LDAP_TIMEOUT | quote }}
+{{- end }}
+{{ if .Values.config.LDAP_ACTIVE_DIRECTORY -}}
+LDAP_ACTIVE_DIRECTORY: {{ .Values.config.LDAP_ACTIVE_DIRECTORY | quote }}
+{{- end }}
+{{ if .Values.config.LDAP_ALLOW_USERNAME_OR_EMAIL_LOGIN -}}
+LDAP_ALLOW_USERNAME_OR_EMAIL_LOGIN: {{ .Values.config.LDAP_ALLOW_USERNAME_OR_EMAIL_LOGIN | quote }}
+{{- end }}
+{{ if .Values.config.LDAP_BLOCK_AUTO_CREATED_USERS -}}
+LDAP_BLOCK_AUTO_CREATED_USERS: {{ .Values.config.LDAP_BLOCK_AUTO_CREATED_USERS | quote }}
+{{- end }}
+{{ if .Values.config.LDAP_BASE -}}
+LDAP_BASE: {{ .Values.config.LDAP_BASE | quote }}
+{{- end }}
+{{ if .Values.config.LDAP_USER_FILTER -}}
+LDAP_USER_FILTER: {{ .Values.config.LDAP_USER_FILTER | quote }}
+{{- end }}
+{{- end }}
+
+{{- define "ldap_data" -}}
+{{ if .Values.config.LDAP_ENABLED -}}
+- name: LDAP_ENABLED
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: LDAP_ENABLED
+{{- end }}
+{{ if .Values.config.LDAP_LABEL -}}
+- name: LDAP_LABEL
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: LDAP_LABEL
+{{- end }}
+{{ if .Values.config.LDAP_HOST -}}
+- name: LDAP_HOST
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: LDAP_HOST
+{{- end }}
+{{ if .Values.config.LDAP_PORT -}}
+- name: LDAP_PORT
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: LDAP_PORT
+{{- end }}
+{{ if .Values.config.LDAP_UID -}}
+- name: LDAP_UID
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: LDAP_UID
+{{- end }}
+{{ if .Values.config.LDAP_METHOD -}}
+- name: LDAP_METHOD
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: LDAP_METHOD
+{{- end }}
+{{ if .Values.config.LDAP_BIND_DN -}}
+- name: LDAP_BIND_DN
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: LDAP_BIND_DN
+{{- end }}
+{{ if .Values.config.LDAP_PASS -}}
+- name: LDAP_PASS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: LDAP_PASS
+{{- end }}
+{{ if .Values.config.LDAP_TIMEOUT -}}
+- name: LDAP_TIMEOUT
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: LDAP_TIMEOUT
+{{- end }}
+{{ if .Values.config.LDAP_ACTIVE_DIRECTORY -}}
+- name: LDAP_ACTIVE_DIRECTORY
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: LDAP_ACTIVE_DIRECTORY
+{{- end }}
+{{ if .Values.config.LDAP_ALLOW_USERNAME_OR_EMAIL_LOGIN -}}
+- name: LDAP_ALLOW_USERNAME_OR_EMAIL_LOGIN
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: LDAP_ALLOW_USERNAME_OR_EMAIL_LOGIN
+{{- end }}
+{{ if .Values.config.LDAP_BLOCK_AUTO_CREATED_USERS -}}
+- name: LDAP_BLOCK_AUTO_CREATED_USERS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: LDAP_BLOCK_AUTO_CREATED_USERS
+{{- end }}
+{{ if .Values.config.LDAP_BASE -}}
+- name: LDAP_BASE
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: LDAP_BASE
+{{- end }}
+{{ if .Values.config.LDAP_USER_FILTER -}}
+- name: LDAP_USER_FILTER
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: LDAP_USER_FILTER
+{{- end }}
+{{- end }}

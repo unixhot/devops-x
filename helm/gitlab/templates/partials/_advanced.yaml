@@ -1,0 +1,225 @@
+{{- define "advanced_config" -}}
+{{ if .Values.config.GITLAB_SIGNUP_ENABLED -}}
+GITLAB_SIGNUP_ENABLED: {{ .Values.config.GITLAB_SIGNUP_ENABLED | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_PROJECTS_LIMIT -}}
+GITLAB_PROJECTS_LIMIT: {{ .Values.config.GITLAB_PROJECTS_LIMIT | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_USERNAME_CHANGE -}}
+GITLAB_USERNAME_CHANGE: {{ .Values.config.GITLAB_USERNAME_CHANGE | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_CREATE_GROUP -}}
+GITLAB_CREATE_GROUP: {{ .Values.config.GITLAB_CREATE_GROUP | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_PROJECTS_ISSUES -}}
+GITLAB_PROJECTS_ISSUES: {{ .Values.config.GITLAB_PROJECTS_ISSUES | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_PROJECTS_MERGE_REQUESTS -}}
+GITLAB_PROJECTS_MERGE_REQUESTS: {{ .Values.config.GITLAB_PROJECTS_MERGE_REQUESTS | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_PROJECTS_WIKI -}}
+GITLAB_PROJECTS_WIKI: {{ .Values.config.GITLAB_PROJECTS_WIKI | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_PROJECTS_SNIPPETS -}}
+GITLAB_PROJECTS_SNIPPETS: {{ .Values.config.GITLAB_PROJECTS_SNIPPETS | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_PROJECTS_BUILDS -}}
+GITLAB_PROJECTS_BUILDS: {{ .Values.config.GITLAB_PROJECTS_BUILDS | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_PROJECTS_CONTAINER_REGISTRY -}}
+GITLAB_PROJECTS_CONTAINER_REGISTRY: {{ .Values.config.GITLAB_PROJECTS_CONTAINER_REGISTRY | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_WEBHOOK_TIMEOUT -}}
+GITLAB_WEBHOOK_TIMEOUT: {{ .Values.config.GITLAB_WEBHOOK_TIMEOUT | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_TIMEOUT -}}
+GITLAB_TIMEOUT: {{ .Values.config.GITLAB_TIMEOUT | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_MAX_OBJECT_SIZE -}}
+GITLAB_MAX_OBJECT_SIZE: {{ .Values.config.GITLAB_MAX_OBJECT_SIZE | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_REPOS_DIR -}}
+GITLAB_REPOS_DIR: {{ .Values.config.GITLAB_REPOS_DIR | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_BACKUP_DIR -}}
+GITLAB_BACKUP_DIR: {{ .Values.config.GITLAB_BACKUP_DIR | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_BUILDS_DIR -}}
+GITLAB_BUILDS_DIR: {{ .Values.config.GITLAB_BUILDS_DIR | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_DOWNLOADS_DIR -}}
+GITLAB_DOWNLOADS_DIR: {{ .Values.config.GITLAB_DOWNLOADS_DIR | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_SHARED_DIR -}}
+GITLAB_SHARED_DIR: {{ .Values.config.GITLAB_SHARED_DIR | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_ARTIFACTS_ENABLED -}}
+GITLAB_ARTIFACTS_ENABLED: {{ .Values.config.GITLAB_ARTIFACTS_ENABLED | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_ARTIFACTS_DIR -}}
+GITLAB_ARTIFACTS_DIR: {{ .Values.config.GITLAB_ARTIFACTS_DIR | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_LFS_ENABLED -}}
+GITLAB_LFS_ENABLED: {{ .Values.config.GITLAB_LFS_ENABLED | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_LFS_OBJECTS_DIR -}}
+GITLAB_LFS_OBJECTS_DIR: {{ .Values.config.GITLAB_LFS_OBJECTS_DIR | quote }}
+{{- end }}
+{{- end }}
+
+{{- define "advanced_data" -}}
+{{ if .Values.config.GITLAB_SIGNUP_ENABLED -}}
+- name: GITLAB_SIGNUP_ENABLED
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_SIGNUP_ENABLED
+{{- end }}
+{{ if .Values.config.GITLAB_PROJECTS_LIMIT -}}
+- name: GITLAB_PROJECTS_LIMIT
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_PROJECTS_LIMIT
+{{- end }}
+{{ if .Values.config.GITLAB_USERNAME_CHANGE -}}
+- name: GITLAB_USERNAME_CHANGE
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_USERNAME_CHANGE
+{{- end }}
+{{ if .Values.config.GITLAB_CREATE_GROUP -}}
+- name: GITLAB_CREATE_GROUP
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_CREATE_GROUP
+{{- end }}
+{{ if .Values.config.GITLAB_PROJECTS_ISSUES -}}
+- name: GITLAB_PROJECTS_ISSUES
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_PROJECTS_ISSUES
+{{- end }}
+{{ if .Values.config.GITLAB_PROJECTS_MERGE_REQUESTS -}}
+- name: GITLAB_PROJECTS_MERGE_REQUESTS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_PROJECTS_MERGE_REQUESTS
+{{- end }}
+{{ if .Values.config.GITLAB_PROJECTS_WIKI -}}
+- name: GITLAB_PROJECTS_WIKI
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_PROJECTS_WIKI
+{{- end }}
+{{ if .Values.config.GITLAB_PROJECTS_SNIPPETS -}}
+- name: GITLAB_PROJECTS_SNIPPETS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_PROJECTS_SNIPPETS
+{{- end }}
+{{ if .Values.config.GITLAB_PROJECTS_BUILDS -}}
+- name: GITLAB_PROJECTS_BUILDS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_PROJECTS_BUILDS
+{{- end }}
+{{ if .Values.config.GITLAB_PROJECTS_CONTAINER_REGISTRY -}}
+- name: GITLAB_PROJECTS_CONTAINER_REGISTRY
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_PROJECTS_CONTAINER_REGISTRY
+{{- end }}
+{{ if .Values.config.GITLAB_WEBHOOK_TIMEOUT -}}
+- name: GITLAB_WEBHOOK_TIMEOUT
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_WEBHOOK_TIMEOUT
+{{- end }}
+{{ if .Values.config.GITLAB_TIMEOUT -}}
+- name: GITLAB_TIMEOUT
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_TIMEOUT
+{{- end }}
+{{ if .Values.config.GITLAB_MAX_OBJECT_SIZE -}}
+- name: GITLAB_MAX_OBJECT_SIZE
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_MAX_OBJECT_SIZE
+{{- end }}
+{{ if .Values.config.GITLAB_REPOS_DIR -}}
+- name: GITLAB_REPOS_DIR
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_REPOS_DIR
+{{- end }}
+{{ if .Values.config.GITLAB_BACKUP_DIR -}}
+- name: GITLAB_BACKUP_DIR
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_BACKUP_DIR
+{{- end }}
+{{ if .Values.config.GITLAB_BUILDS_DIR -}}
+- name: GITLAB_BUILDS_DIR
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_BUILDS_DIR
+{{- end }}
+{{ if .Values.config.GITLAB_DOWNLOADS_DIR -}}
+- name: GITLAB_DOWNLOADS_DIR
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_DOWNLOADS_DIR
+{{- end }}
+{{ if .Values.config.GITLAB_SHARED_DIR -}}
+- name: GITLAB_SHARED_DIR
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_SHARED_DIR
+{{- end }}
+{{ if .Values.config.GITLAB_ARTIFACTS_ENABLED -}}
+- name: GITLAB_ARTIFACTS_ENABLED
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_ARTIFACTS_ENABLED
+{{- end }}
+{{ if .Values.config.GITLAB_ARTIFACTS_DIR -}}
+- name: GITLAB_ARTIFACTS_DIR
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_ARTIFACTS_DIR
+{{- end }}
+{{ if .Values.config.GITLAB_LFS_ENABLED -}}
+- name: GITLAB_LFS_ENABLED
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_LFS_ENABLED
+{{- end }}
+{{ if .Values.config.GITLAB_LFS_OBJECTS_DIR -}}
+- name: GITLAB_LFS_OBJECTS_DIR
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: GITLAB_LFS_OBJECTS_DIR
+{{- end }}
+{{- end }}

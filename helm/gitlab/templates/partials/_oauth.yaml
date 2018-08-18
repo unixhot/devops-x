@@ -1,0 +1,536 @@
+{{- define "oauth_config" -}}
+{{ if .Values.config.OAUTH_ENABLED -}}
+OAUTH_ENABLED: {{ .Values.config.OAUTH_ENABLED | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_AUTO_SIGN_IN_WITH_PROVIDER -}}
+OAUTH_AUTO_SIGN_IN_WITH_PROVIDER: {{ .Values.config.OAUTH_AUTO_SIGN_IN_WITH_PROVIDER | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_ALLOW_SSO -}}
+OAUTH_ALLOW_SSO: {{ .Values.config.OAUTH_ALLOW_SSO | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_BLOCK_AUTO_CREATED_USERS -}}
+OAUTH_BLOCK_AUTO_CREATED_USERS: {{ .Values.config.OAUTH_BLOCK_AUTO_CREATED_USERS | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_AUTO_LINK_LDAP_USER -}}
+OAUTH_AUTO_LINK_LDAP_USER: {{ .Values.config.OAUTH_AUTO_LINK_LDAP_USER | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_AUTO_LINK_SAML_USER -}}
+OAUTH_AUTO_LINK_SAML_USER: {{ .Values.config.OAUTH_AUTO_LINK_SAML_USER | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_EXTERNAL_PROVIDERS -}}
+OAUTH_EXTERNAL_PROVIDERS: {{ .Values.config.OAUTH_EXTERNAL_PROVIDERS | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_CAS3_LABEL -}}
+OAUTH_CAS3_LABEL: {{ .Values.config.OAUTH_CAS3_LABEL | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_CAS3_SERVER -}}
+OAUTH_CAS3_SERVER: {{ .Values.config.OAUTH_CAS3_SERVER | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_CAS3_DISABLE_SSL_VERIFICATION -}}
+OAUTH_CAS3_DISABLE_SSL_VERIFICATION: {{ .Values.config.OAUTH_CAS3_DISABLE_SSL_VERIFICATION | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_CAS3_LOGIN_URL -}}
+OAUTH_CAS3_LOGIN_URL: {{ .Values.config.OAUTH_CAS3_LOGIN_URL | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_CAS3_VALIDATE_URL -}}
+OAUTH_CAS3_VALIDATE_URL: {{ .Values.config.OAUTH_CAS3_VALIDATE_URL | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_CAS3_LOGOUT_URL -}}
+OAUTH_CAS3_LOGOUT_URL: {{ .Values.config.OAUTH_CAS3_LOGOUT_URL | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_GOOGLE_API_KEY -}}
+OAUTH_GOOGLE_API_KEY: {{ .Values.config.OAUTH_GOOGLE_API_KEY | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_GOOGLE_APP_SECRET -}}
+OAUTH_GOOGLE_APP_SECRET: {{ .Values.config.OAUTH_GOOGLE_APP_SECRET | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_GOOGLE_RESTRICT_DOMAIN -}}
+OAUTH_GOOGLE_RESTRICT_DOMAIN: {{ .Values.config.OAUTH_GOOGLE_RESTRICT_DOMAIN | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_FACEBOOK_API_KEY -}}
+OAUTH_FACEBOOK_API_KEY: {{ .Values.config.OAUTH_FACEBOOK_API_KEY | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_FACEBOOK_APP_SECRET -}}
+OAUTH_FACEBOOK_APP_SECRET: {{ .Values.config.OAUTH_FACEBOOK_APP_SECRET | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_TWITTER_API_KEY -}}
+OAUTH_TWITTER_API_KEY: {{ .Values.config.OAUTH_TWITTER_API_KEY | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_TWITTER_APP_SECRET -}}
+OAUTH_TWITTER_APP_SECRET: {{ .Values.config.OAUTH_TWITTER_APP_SECRET | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_AUTHENTIQ_CLIENT_ID -}}
+OAUTH_AUTHENTIQ_CLIENT_ID: {{ .Values.config.OAUTH_AUTHENTIQ_CLIENT_ID | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_AUTHENTIQ_CLIENT_SECRET -}}
+OAUTH_AUTHENTIQ_CLIENT_SECRET: {{ .Values.config.OAUTH_AUTHENTIQ_CLIENT_SECRET | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_AUTHENTIQ_SCOPE -}}
+OAUTH_AUTHENTIQ_SCOPE: {{ .Values.config.OAUTH_AUTHENTIQ_SCOPE | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_AUTHENTIQ_REDIRECT_URI -}}
+OAUTH_AUTHENTIQ_REDIRECT_URI: {{ .Values.config.OAUTH_AUTHENTIQ_REDIRECT_URI | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_GITHUB_API_KEY -}}
+OAUTH_GITHUB_API_KEY: {{ .Values.config.OAUTH_GITHUB_API_KEY | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_GITHUB_APP_SECRET -}}
+OAUTH_GITHUB_APP_SECRET: {{ .Values.config.OAUTH_GITHUB_APP_SECRET | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_GITHUB_URL -}}
+OAUTH_GITHUB_URL: {{ .Values.config.OAUTH_GITHUB_URL | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_GITHUB_VERIFY_SSL -}}
+OAUTH_GITHUB_VERIFY_SSL: {{ .Values.config.OAUTH_GITHUB_VERIFY_SSL | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_GITLAB_API_KEY -}}
+OAUTH_GITLAB_API_KEY: {{ .Values.config.OAUTH_GITLAB_API_KEY | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_GITLAB_APP_SECRET -}}
+OAUTH_GITLAB_APP_SECRET: {{ .Values.config.OAUTH_GITLAB_APP_SECRET | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_BITBUCKET_API_KEY -}}
+OAUTH_BITBUCKET_API_KEY: {{ .Values.config.OAUTH_BITBUCKET_API_KEY | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_BITBUCKET_APP_SECRET -}}
+OAUTH_BITBUCKET_APP_SECRET: {{ .Values.config.OAUTH_BITBUCKET_APP_SECRET | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_ASSERTION_CONSUMER_SERVICE_URL -}}
+OAUTH_SAML_ASSERTION_CONSUMER_SERVICE_URL: {{ .Values.config.OAUTH_SAML_ASSERTION_CONSUMER_SERVICE_URL | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_IDP_CERT_FINGERPRINT -}}
+OAUTH_SAML_IDP_CERT_FINGERPRINT: {{ .Values.config.OAUTH_SAML_IDP_CERT_FINGERPRINT | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_IDP_SSO_TARGET_URL -}}
+OAUTH_SAML_IDP_SSO_TARGET_URL: {{ .Values.config.OAUTH_SAML_IDP_SSO_TARGET_URL | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_ISSUER -}}
+OAUTH_SAML_ISSUER: {{ .Values.config.OAUTH_SAML_ISSUER | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_LABEL -}}
+OAUTH_SAML_LABEL: {{ .Values.config.OAUTH_SAML_LABEL | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_NAME_IDENTIFIER_FORMAT -}}
+OAUTH_SAML_NAME_IDENTIFIER_FORMAT: {{ .Values.config.OAUTH_SAML_NAME_IDENTIFIER_FORMAT | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_GROUPS_ATTRIBUTE -}}
+OAUTH_SAML_GROUPS_ATTRIBUTE: {{ .Values.config.OAUTH_SAML_GROUPS_ATTRIBUTE | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_EXTERNAL_GROUPS -}}
+OAUTH_SAML_EXTERNAL_GROUPS: {{ .Values.config.OAUTH_SAML_EXTERNAL_GROUPS | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_ATTRIBUTE_STATEMENTS_EMAIL -}}
+OAUTH_SAML_ATTRIBUTE_STATEMENTS_EMAIL: {{ .Values.config.OAUTH_SAML_ATTRIBUTE_STATEMENTS_EMAIL | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_ATTRIBUTE_STATEMENTS_NAME -}}
+OAUTH_SAML_ATTRIBUTE_STATEMENTS_NAME: {{ .Values.config.OAUTH_SAML_ATTRIBUTE_STATEMENTS_NAME | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_ATTRIBUTE_STATEMENTS_FIRST_NAME -}}
+OAUTH_SAML_ATTRIBUTE_STATEMENTS_FIRST_NAME: {{ .Values.config.OAUTH_SAML_ATTRIBUTE_STATEMENTS_FIRST_NAME | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_ATTRIBUTE_STATEMENTS_LAST_NAME -}}
+OAUTH_SAML_ATTRIBUTE_STATEMENTS_LAST_NAME: {{ .Values.config.OAUTH_SAML_ATTRIBUTE_STATEMENTS_LAST_NAME | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_CROWD_SERVER_URL -}}
+OAUTH_CROWD_SERVER_URL: {{ .Values.config.OAUTH_CROWD_SERVER_URL | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_CROWD_APP_NAME -}}
+OAUTH_CROWD_APP_NAME: {{ .Values.config.OAUTH_CROWD_APP_NAME | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_CROWD_APP_PASSWORD -}}
+OAUTH_CROWD_APP_PASSWORD: {{ .Values.config.OAUTH_CROWD_APP_PASSWORD | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_AUTH0_CLIENT_ID -}}
+OAUTH_AUTH0_CLIENT_ID: {{ .Values.config.OAUTH_AUTH0_CLIENT_ID | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_AUTH0_CLIENT_SECRET -}}
+OAUTH_AUTH0_CLIENT_SECRET: {{ .Values.config.OAUTH_AUTH0_CLIENT_SECRET | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_AUTH0_DOMAIN -}}
+OAUTH_AUTH0_DOMAIN: {{ .Values.config.OAUTH_AUTH0_DOMAIN | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_AZURE_API_KEY -}}
+OAUTH_AZURE_API_KEY: {{ .Values.config.OAUTH_AZURE_API_KEY | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_AZURE_API_SECRET -}}
+OAUTH_AZURE_API_SECRET: {{ .Values.config.OAUTH_AZURE_API_SECRET | quote }}
+{{- end }}
+{{ if .Values.config.OAUTH_AZURE_TENANT_ID -}}
+OAUTH_AZURE_TENANT_ID: {{ .Values.config.OAUTH_AZURE_TENANT_ID | quote }}
+{{- end }}
+{{- end }}
+
+{{- define "oauth_data" -}}
+{{ if .Values.config.OAUTH_ENABLED -}}
+- name: OAUTH_ENABLED
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_ENABLED
+{{- end }}
+{{ if .Values.config.OAUTH_AUTO_SIGN_IN_WITH_PROVIDER -}}
+- name: OAUTH_AUTO_SIGN_IN_WITH_PROVIDER
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_AUTO_SIGN_IN_WITH_PROVIDER
+{{- end }}
+{{ if .Values.config.OAUTH_ALLOW_SSO -}}
+- name: OAUTH_ALLOW_SSO
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_ALLOW_SSO
+{{- end }}
+{{ if .Values.config.OAUTH_BLOCK_AUTO_CREATED_USERS -}}
+- name: OAUTH_BLOCK_AUTO_CREATED_USERS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_BLOCK_AUTO_CREATED_USERS
+{{- end }}
+{{ if .Values.config.OAUTH_AUTO_LINK_LDAP_USER -}}
+- name: OAUTH_AUTO_LINK_LDAP_USER
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_AUTO_LINK_LDAP_USER
+{{- end }}
+{{ if .Values.config.OAUTH_AUTO_LINK_SAML_USER -}}
+- name: OAUTH_AUTO_LINK_SAML_USER
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_AUTO_LINK_SAML_USER
+{{- end }}
+{{ if .Values.config.OAUTH_EXTERNAL_PROVIDERS -}}
+- name: OAUTH_EXTERNAL_PROVIDERS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_EXTERNAL_PROVIDERS
+{{- end }}
+{{ if .Values.config.OAUTH_CAS3_LABEL -}}
+- name: OAUTH_CAS3_LABEL
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_CAS3_LABEL
+{{- end }}
+{{ if .Values.config.OAUTH_CAS3_SERVER -}}
+- name: OAUTH_CAS3_SERVER
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_CAS3_SERVER
+{{- end }}
+{{ if .Values.config.OAUTH_CAS3_DISABLE_SSL_VERIFICATION -}}
+- name: OAUTH_CAS3_DISABLE_SSL_VERIFICATION
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_CAS3_DISABLE_SSL_VERIFICATION
+{{- end }}
+{{ if .Values.config.OAUTH_CAS3_LOGIN_URL -}}
+- name: OAUTH_CAS3_LOGIN_URL
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_CAS3_LOGIN_URL
+{{- end }}
+{{ if .Values.config.OAUTH_CAS3_VALIDATE_URL -}}
+- name: OAUTH_CAS3_VALIDATE_URL
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_CAS3_VALIDATE_URL
+{{- end }}
+{{ if .Values.config.OAUTH_CAS3_LOGOUT_URL -}}
+- name: OAUTH_CAS3_LOGOUT_URL
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_CAS3_LOGOUT_URL
+{{- end }}
+{{ if .Values.config.OAUTH_GOOGLE_API_KEY -}}
+- name: OAUTH_GOOGLE_API_KEY
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_GOOGLE_API_KEY
+{{- end }}
+{{ if .Values.config.OAUTH_GOOGLE_APP_SECRET -}}
+- name: OAUTH_GOOGLE_APP_SECRET
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_GOOGLE_APP_SECRET
+{{- end }}
+{{ if .Values.config.OAUTH_GOOGLE_RESTRICT_DOMAIN -}}
+- name: OAUTH_GOOGLE_RESTRICT_DOMAIN
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_GOOGLE_RESTRICT_DOMAIN
+{{- end }}
+{{ if .Values.config.OAUTH_FACEBOOK_API_KEY -}}
+- name: OAUTH_FACEBOOK_API_KEY
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_FACEBOOK_API_KEY
+{{- end }}
+{{ if .Values.config.OAUTH_FACEBOOK_APP_SECRET -}}
+- name: OAUTH_FACEBOOK_APP_SECRET
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_FACEBOOK_APP_SECRET
+{{- end }}
+{{ if .Values.config.OAUTH_TWITTER_API_KEY -}}
+- name: OAUTH_TWITTER_API_KEY
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_TWITTER_API_KEY
+{{- end }}
+{{ if .Values.config.OAUTH_TWITTER_APP_SECRET -}}
+- name: OAUTH_TWITTER_APP_SECRET
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_TWITTER_APP_SECRET
+{{- end }}
+{{ if .Values.config.OAUTH_AUTHENTIQ_CLIENT_ID -}}
+- name: OAUTH_AUTHENTIQ_CLIENT_ID
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_AUTHENTIQ_CLIENT_ID
+{{- end }}
+{{ if .Values.config.OAUTH_AUTHENTIQ_CLIENT_SECRET -}}
+- name: OAUTH_AUTHENTIQ_CLIENT_SECRET
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_AUTHENTIQ_CLIENT_SECRET
+{{- end }}
+{{ if .Values.config.OAUTH_AUTHENTIQ_SCOPE -}}
+- name: OAUTH_AUTHENTIQ_SCOPE
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_AUTHENTIQ_SCOPE
+{{- end }}
+{{ if .Values.config.OAUTH_AUTHENTIQ_REDIRECT_URI -}}
+- name: OAUTH_AUTHENTIQ_REDIRECT_URI
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_AUTHENTIQ_REDIRECT_URI
+{{- end }}
+{{ if .Values.config.OAUTH_GITHUB_API_KEY -}}
+- name: OAUTH_GITHUB_API_KEY
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_GITHUB_API_KEY
+{{- end }}
+{{ if .Values.config.OAUTH_GITHUB_APP_SECRET -}}
+- name: OAUTH_GITHUB_APP_SECRET
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_GITHUB_APP_SECRET
+{{- end }}
+{{ if .Values.config.OAUTH_GITHUB_URL -}}
+- name: OAUTH_GITHUB_URL
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_GITHUB_URL
+{{- end }}
+{{ if .Values.config.OAUTH_GITHUB_VERIFY_SSL -}}
+- name: OAUTH_GITHUB_VERIFY_SSL
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_GITHUB_VERIFY_SSL
+{{- end }}
+{{ if .Values.config.OAUTH_GITLAB_API_KEY -}}
+- name: OAUTH_GITLAB_API_KEY
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_GITLAB_API_KEY
+{{- end }}
+{{ if .Values.config.OAUTH_GITLAB_APP_SECRET -}}
+- name: OAUTH_GITLAB_APP_SECRET
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_GITLAB_APP_SECRET
+{{- end }}
+{{ if .Values.config.OAUTH_BITBUCKET_API_KEY -}}
+- name: OAUTH_BITBUCKET_API_KEY
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_BITBUCKET_API_KEY
+{{- end }}
+{{ if .Values.config.OAUTH_BITBUCKET_APP_SECRET -}}
+- name: OAUTH_BITBUCKET_APP_SECRET
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_BITBUCKET_APP_SECRET
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_ASSERTION_CONSUMER_SERVICE_URL -}}
+- name: OAUTH_SAML_ASSERTION_CONSUMER_SERVICE_URL
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_SAML_ASSERTION_CONSUMER_SERVICE_URL
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_IDP_CERT_FINGERPRINT -}}
+- name: OAUTH_SAML_IDP_CERT_FINGERPRINT
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_SAML_IDP_CERT_FINGERPRINT
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_IDP_SSO_TARGET_URL -}}
+- name: OAUTH_SAML_IDP_SSO_TARGET_URL
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_SAML_IDP_SSO_TARGET_URL
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_ISSUER -}}
+- name: OAUTH_SAML_ISSUER
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_SAML_ISSUER
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_LABEL -}}
+- name: OAUTH_SAML_LABEL
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_SAML_LABEL
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_NAME_IDENTIFIER_FORMAT -}}
+- name: OAUTH_SAML_NAME_IDENTIFIER_FORMAT
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_SAML_NAME_IDENTIFIER_FORMAT
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_GROUPS_ATTRIBUTE -}}
+- name: OAUTH_SAML_GROUPS_ATTRIBUTE
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_SAML_GROUPS_ATTRIBUTE
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_EXTERNAL_GROUPS -}}
+- name: OAUTH_SAML_EXTERNAL_GROUPS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_SAML_EXTERNAL_GROUPS
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_ATTRIBUTE_STATEMENTS_EMAIL -}}
+- name: OAUTH_SAML_ATTRIBUTE_STATEMENTS_EMAIL
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_SAML_ATTRIBUTE_STATEMENTS_EMAIL
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_ATTRIBUTE_STATEMENTS_NAME -}}
+- name: OAUTH_SAML_ATTRIBUTE_STATEMENTS_NAME
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_SAML_ATTRIBUTE_STATEMENTS_NAME
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_ATTRIBUTE_STATEMENTS_FIRST_NAME -}}
+- name: OAUTH_SAML_ATTRIBUTE_STATEMENTS_FIRST_NAME
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_SAML_ATTRIBUTE_STATEMENTS_FIRST_NAME
+{{- end }}
+{{ if .Values.config.OAUTH_SAML_ATTRIBUTE_STATEMENTS_LAST_NAME -}}
+- name: OAUTH_SAML_ATTRIBUTE_STATEMENTS_LAST_NAME
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_SAML_ATTRIBUTE_STATEMENTS_LAST_NAME
+{{- end }}
+{{ if .Values.config.OAUTH_CROWD_SERVER_URL -}}
+- name: OAUTH_CROWD_SERVER_URL
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_CROWD_SERVER_URL
+{{- end }}
+{{ if .Values.config.OAUTH_CROWD_APP_NAME -}}
+- name: OAUTH_CROWD_APP_NAME
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_CROWD_APP_NAME
+{{- end }}
+{{ if .Values.config.OAUTH_CROWD_APP_PASSWORD -}}
+- name: OAUTH_CROWD_APP_PASSWORD
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_CROWD_APP_PASSWORD
+{{- end }}
+{{ if .Values.config.OAUTH_AUTH0_CLIENT_ID -}}
+- name: OAUTH_AUTH0_CLIENT_ID
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_AUTH0_CLIENT_ID
+{{- end }}
+{{ if .Values.config.OAUTH_AUTH0_CLIENT_SECRET -}}
+- name: OAUTH_AUTH0_CLIENT_SECRET
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_AUTH0_CLIENT_SECRET
+{{- end }}
+{{ if .Values.config.OAUTH_AUTH0_DOMAIN -}}
+- name: OAUTH_AUTH0_DOMAIN
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_AUTH0_DOMAIN
+{{- end }}
+{{ if .Values.config.OAUTH_AZURE_API_KEY -}}
+- name: OAUTH_AZURE_API_KEY
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_AZURE_API_KEY
+{{- end }}
+{{ if .Values.config.OAUTH_AZURE_API_SECRET -}}
+- name: OAUTH_AZURE_API_SECRET
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_AZURE_API_SECRET
+{{- end }}
+{{ if .Values.config.OAUTH_AZURE_TENANT_ID -}}
+- name: OAUTH_AZURE_TENANT_ID
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" .}}
+      key: OAUTH_AZURE_TENANT_ID
+{{- end }}
+
+{{- end }}

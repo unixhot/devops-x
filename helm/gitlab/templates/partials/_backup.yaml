@@ -1,0 +1,66 @@
+{{- define "backup_config" -}}
+{{ if .Values.config.GITLAB_BACKUP_SCHEDULE -}}
+GITLAB_BACKUP_SCHEDULE: {{ .Values.config.GITLAB_BACKUP_SCHEDULE | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_BACKUP_EXPIRY -}}
+GITLAB_BACKUP_EXPIRY: {{ .Values.config.GITLAB_BACKUP_EXPIRY | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_BACKUP_PG_SCHEMA -}}
+GITLAB_BACKUP_PG_SCHEMA: {{ .Values.config.GITLAB_BACKUP_PG_SCHEMA | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_BACKUP_ARCHIVE_PERMISSIONS -}}
+GITLAB_BACKUP_ARCHIVE_PERMISSIONS: {{ .Values.config.GITLAB_BACKUP_ARCHIVE_PERMISSIONS | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_BACKUP_TIME -}}
+GITLAB_BACKUP_TIME: {{ .Values.config.GITLAB_BACKUP_TIME | quote }}
+{{- end }}
+{{ if .Values.config.GITLAB_BACKUP_SKIP -}}
+GITLAB_BACKUP_SKIP: {{ .Values.config.GITLAB_BACKUP_SKIP | quote }}
+{{- end }}
+{{- end }}
+
+
+{{- define "backup_data" -}}
+{{ if .Values.config.GITLAB_BACKUP_SCHEDULE -}}
+- name: GITLAB_BACKUP_SCHEDULE
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_BACKUP_SCHEDULE
+{{- end }}
+{{ if .Values.config.GITLAB_BACKUP_EXPIRY -}}
+- name: GITLAB_BACKUP_EXPIRY
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_BACKUP_EXPIRY
+{{- end }}
+{{ if .Values.config.GITLAB_BACKUP_PG_SCHEMA -}}
+- name: GITLAB_BACKUP_PG_SCHEMA
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_BACKUP_PG_SCHEMA
+{{- end }}
+{{ if .Values.config.GITLAB_BACKUP_ARCHIVE_PERMISSIONS -}}
+- name: GITLAB_BACKUP_ARCHIVE_PERMISSIONS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_BACKUP_ARCHIVE_PERMISSIONS
+{{- end }}
+{{ if .Values.config.GITLAB_BACKUP_TIME -}}
+- name: GITLAB_BACKUP_TIME
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_BACKUP_TIME
+{{- end }}
+{{ if .Values.config.GITLAB_BACKUP_SKIP -}}
+- name: GITLAB_BACKUP_SKIP
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GITLAB_BACKUP_SKIP
+{{- end }}
+{{- end }}

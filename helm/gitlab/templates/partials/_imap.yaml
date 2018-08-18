@@ -1,0 +1,86 @@
+{{- define "imap_config" -}}
+{{ if .Values.config.IMAP_ENABLED -}}
+IMAP_ENABLED: {{ .Values.config.IMAP_ENABLED | quote }}
+{{- end }}
+{{ if .Values.config.IMAP_HOST -}}
+IMAP_HOST: {{ .Values.config.IMAP_HOST | quote }}
+{{- end }}
+{{ if .Values.config.IMAP_PORT -}}
+IMAP_PORT: {{ .Values.config.IMAP_PORT | quote }}
+{{- end }}
+{{ if .Values.config.IMAP_USER -}}
+IMAP_USER: {{ .Values.config.IMAP_USER | quote }}
+{{- end }}
+{{ if .Values.config.IMAP_PASS -}}
+IMAP_PASS: {{ .Values.config.IMAP_PASS | quote }}
+{{- end }}
+{{ if .Values.config.IMAP_SSL -}}
+IMAP_SSL: {{ .Values.config.IMAP_SSL | quote }}
+{{- end }}
+{{ if .Values.config.IMAP_STARTTLS -}}
+IMAP_STARTTLS: {{ .Values.config.IMAP_STARTTLS | quote }}
+{{- end }}
+{{ if .Values.config.IMAP_MAILBOX -}}
+IMAP_MAILBOX: {{ .Values.config.IMAP_MAILBOX | quote }}
+{{- end }}
+{{- end }}
+
+{{- define "imap_data" -}}
+{{ if .Values.config.IMAP_ENABLED -}}
+- name: IMAP_ENABLED
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: IMAP_ENABLED
+{{- end }}
+{{ if .Values.config.IMAP_HOST -}}
+- name: IMAP_HOST
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: IMAP_HOST
+{{- end }}
+{{ if .Values.config.IMAP_PORT -}}
+- name: IMAP_PORT
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: IMAP_PORT
+{{- end }}
+{{ if .Values.config.IMAP_USER -}}
+- name: IMAP_USER
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: IMAP_USER
+{{- end }}
+{{ if .Values.config.IMAP_PASS -}}
+- name: IMAP_PASS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: IMAP_PASS
+{{- end }}
+{{ if .Values.config.IMAP_SSL -}}
+- name: IMAP_SSL
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: IMAP_SSL
+{{- end }}
+{{ if .Values.config.IMAP_STARTTLS -}}
+- name: IMAP_STARTTLS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: IMAP_STARTTLS
+{{- end }}
+{{ if .Values.config.IMAP_MAILBOX -}}
+- name: IMAP_MAILBOX
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: IMAP_MAILBOX
+{{- end }}
+
+{{- end }}

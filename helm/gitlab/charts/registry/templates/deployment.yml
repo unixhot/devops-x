@@ -1,0 +1,60 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" . }}
+    spec:
+      containers:
+      - name: {{ template "fullname" . }}
+        image: "{{ .Values.image }}:{{ .Values.imageTag }}"
+        imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+        env:
+        - name: REGISTRY_LOG_LEVEL
+          value: {{ .Values.logLevel | quote}}
+        - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
+          value: /var/lib/registry
+        - name: REGISTRY_HTTP_ADDR
+          value: :5000
+        - name: REGISTRY_AUTH_TOKEN_REALM
+          value: {{ .Values.authTokenRealm | quote }}
+        - name: REGISTRY_STORAGE_DELETE_ENABLED
+          value: {{ .Values.storageDeleteEnabled | quote}}
+        - name: REGISTRY_AUTH_TOKEN_SERVICE
+          value: {{ .Values.authTokenService | quote }}
+        - name: REGISTRY_AUTH_TOKEN_ISSUER
+          value: {{ .Values.authTokenIssuer | quote }}
+        - name: REGISTRY_AUTH_TOKEN_ROOTCERTBUNDLE
+          value: /certs/tls.crt
+        volumeMounts:
+        - name: image-store
+          mountPath: /var/lib/registry
+        - name: certs
+          mountPath: /certs
+          readOnly: true
+        ports:
+        - containerPort: 5000
+          name: registry
+          protocol: TCP
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+      volumes:
+      - name: image-store
+      {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ template "fullname" . }}-data
+      {{- else }}
+        emptyDir: {}
+      {{- end }}
+      - name: certs
+        secret:
+          secretName:  {{ default "registry-server-tls" .Values.ingress.secretName }}

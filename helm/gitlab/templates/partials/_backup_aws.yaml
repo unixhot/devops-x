@@ -1,0 +1,76 @@
+{{- define "aws_backup_config" -}}
+{{ if .Values.config.AWS_BACKUPS -}}
+AWS_BACKUPS: {{ .Values.config.AWS_BACKUPS | quote }}
+{{- end }}
+{{ if .Values.config.AWS_BACKUP_REGION -}}
+AWS_BACKUP_REGION: {{ .Values.config.AWS_BACKUP_REGION | quote }}
+{{- end }}
+{{ if .Values.config.AWS_BACKUP_ENDPOINT -}}
+AWS_BACKUP_ENDPOINT: {{ .Values.config.AWS_BACKUP_ENDPOINT | quote }}
+{{- end }}
+{{ if .Values.config.AWS_BACKUP_ACCESS_KEY_ID -}}
+AWS_BACKUP_ACCESS_KEY_ID: {{ .Values.config.AWS_BACKUP_ACCESS_KEY_ID | quote }}
+{{- end }}
+{{ if .Values.config.AWS_BACKUP_SECRET_ACCESS_KEY -}}
+AWS_BACKUP_SECRET_ACCESS_KEY: {{ .Values.config.AWS_BACKUP_SECRET_ACCESS_KEY | quote }}
+{{- end }}
+{{ if .Values.config.AWS_BACKUP_BUCKET -}}
+AWS_BACKUP_BUCKET: {{ .Values.config.AWS_BACKUP_BUCKET | quote }}
+{{- end }}
+{{ if .Values.config.AWS_BACKUP_MULTIPART_CHUNK_SIZE -}}
+AWS_BACKUP_MULTIPART_CHUNK_SIZE: {{ .Values.config.AWS_BACKUP_MULTIPART_CHUNK_SIZE | quote }}
+{{- end }}
+{{- end }}
+
+
+{{- define "aws_backup_data" -}}
+{{ if .Values.config.AWS_BACKUPS -}}
+- name: AWS_BACKUPS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: AWS_BACKUPS
+{{- end }}
+{{ if .Values.config.AWS_BACKUP_REGION -}}
+- name: AWS_BACKUP_REGION
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: AWS_BACKUP_REGION
+{{- end }}
+{{ if .Values.config.AWS_BACKUP_ENDPOINT -}}
+- name: AWS_BACKUP_ENDPOINT
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: AWS_BACKUP_ENDPOINT
+{{- end }}
+{{ if .Values.config.AWS_BACKUP_ACCESS_KEY_ID -}}
+- name: AWS_BACKUP_ACCESS_KEY_ID
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: AWS_BACKUP_ACCESS_KEY_ID
+{{- end }}
+{{ if .Values.config.AWS_BACKUP_SECRET_ACCESS_KEY -}}
+- name: AWS_BACKUP_SECRET_ACCESS_KEY
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: AWS_BACKUP_SECRET_ACCESS_KEY
+{{- end }}
+{{ if .Values.config.AWS_BACKUP_BUCKET -}}
+- name: AWS_BACKUP_BUCKET
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: AWS_BACKUP_BUCKET
+{{- end }}
+{{ if .Values.config.AWS_BACKUP_MULTIPART_CHUNK_SIZE -}}
+- name: AWS_BACKUP_MULTIPART_CHUNK_SIZE
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: AWS_BACKUP_MULTIPART_CHUNK_SIZE
+{{- end }}
+{{- end }}

@@ -1,0 +1,149 @@
+## GitLab image
+## ref: https://hub.docker.com/r/sameersbn/gitlab/
+##
+## image: sameersbn/gitlab
+image: registry.devopsedu.com:5000/devops/gitlab
+
+## Gitlab image version
+## ref: https://hub.docker.com/r/sameersbn/gitlab/tags/
+##
+imageTag: "9.4.4"
+
+## Specify a imagePullPolicy
+## 'Always' if imageTag is 'latest', else set to 'IfNotPresent'
+## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+##
+# imagePullPolicy:
+
+## For minikube, set this to NodePort, elsewhere use LoadBalancer
+## ref: http://kubernetes.io/docs/user-guide/services/#publishing-services---service-types
+##
+serviceType: NodePort
+
+## Configure external service ports
+## ref: http://kubernetes.io/docs/user-guide/services/
+sshPort: 22
+httpPort: 80
+httpsPort: 443
+
+
+ingress:
+  enabled: true
+
+  ## Gitlab Ingress annotations
+  ##
+  # annotations:
+  #  kubernetes.io/ingress.class: nginx
+  #  kubernetes.io/tls-acme: 'true'
+
+  ## Gitlab Ingress hostnames
+  ## Must be provided if Ingress is enabled
+  ##
+  # hosts:
+  #  - gitlab.example.com
+  hosts:
+    - gitlab.example.com
+
+  ## Gitlab Ingress TLS configuration
+  ## Secrets must be manually created in the namespace
+  ##
+  # tls:
+  #   - secretName: gitlab-server-tls
+  #     hosts:
+  #       - gitlab.example.com
+
+
+## Configure resource requests and limits
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+##
+resources:
+  ## GitLab requires a good deal of resources. We have split out Postgres and
+  ## redis, which helps some. Refer to the guidelines for larger installs.
+  ## ref: https://docs.gitlab.com/ce/install/requirements.html#hardware-requirements
+  requests:
+    memory: 1Gi
+    cpu: 500m
+  limits:
+    memory: 2Gi
+    cpu: 1
+
+## Enable persistence using Persistent Volume Claims
+## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+## ref: https://docs.gitlab.com/ce/install/requirements.html#storage
+##
+persistence:
+  ## This volume persists generated configuration files, keys, and certs.
+  ##
+  enabled: true
+  size: 10Gi
+  ## If defined, volume.beta.kubernetes.io/storage-class: <storageClass>
+  ## Default: volume.alpha.kubernetes.io/storage-class: default
+  ##
+  # storageClass: ""
+  storageClass: "nfs-dynamic-class"
+  accessMode: ReadWriteOnce
+
+## Configuration values for the postgresql dependency.
+## ref: https://github.com/kubernetes/charts/blob/master/stable/postgresql/README.md
+##
+postgresql:
+  # 9.6 is the newest supported version for the GitLab container
+  imageTag: "9.6"
+  cpu: 1000m
+  memory: 1Gi
+
+  postgresUser: gitlab
+  postgresPassword: gitlab
+  postgresDatabase: gitlab_production
+
+  persistence:
+    size: 10Gi
+
+## Configuration values for the redis dependency.
+## ref: https://github.com/kubernetes/charts/blob/master/stable/redis/README.md
+##
+redis:
+  image: redis:3.2.8
+
+  redisPassword: "gitlabRedis"
+  resources:
+    requests:
+      memory: 1Gi
+
+  persistence:
+    size: 10Gi
+
+
+minio:
+  # https://hub.docker.com/r/minio/minio/tags/
+  imageTag: "RELEASE.2017-03-16T21-50-32Z"
+  mode: "standalone"
+  # accessKey: "AKIAIOSFODNN7EXAMPLE"
+  # secretKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+
+  persistence:
+    enabled: true
+    size: 20Gi
+
+
+config:
+  DEBUG: "false"
+  # GITLAB_ROOT_EMAIL: "admin@example.com"
+  # GITLAB_ROOT_PASSWORD: ""
+  # GITLAB_HOST: gitlab.example.com
+  GITLAB_PORT: 80
+  GITLAB_HTTPS: "false"
+  GITLAB_SSH_PORT: "22"
+  GITLAB_SHARED_RUNNERS_REGISTRATION_TOKEN: "4CAi770WqUUVgYzyGmeS0PbGqcpTKl8XLVZfRZom"
+
+
+runner:
+  enabled: false
+  ## Host value for gitlabUrl should be the same as config.GITLAB_HOST
+  gitlabUrl: "https://gitlab.example.com/ci/"
+  ## registrationToken should be the same as config GITLAB_SHARED_RUNNERS_REGISTRATION_TOKEN
+  ## for the fresh systems
+  registrationToken: "4CAi770WqUUVgYzyGmeS0PbGqcpTKl8XLVZfRZom"
+
+registry:
+  enabled: true

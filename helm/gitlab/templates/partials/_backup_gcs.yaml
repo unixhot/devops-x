@@ -1,0 +1,51 @@
+{{- define "gcs_backup_config" -}}
+{{ if .Values.config.GCS_BACKUPS -}}
+GCS_BACKUPS: {{ .Values.config.GCS_BACKUPS | quote }}
+{{- end }}
+{{ if .Values.config.GCS_BACKUP_ACCESS_KEY_ID -}}
+GCS_BACKUP_ACCESS_KEY_ID: {{ .Values.config.GCS_BACKUP_ACCESS_KEY_ID | quote }}
+{{- end }}
+{{ if .Values.config.GCS_BACKUP_SECRET_ACCESS_KEY -}}
+GCS_BACKUP_SECRET_ACCESS_KEY: {{ .Values.config.GCS_BACKUP_SECRET_ACCESS_KEY | quote }}
+{{- end }}
+{{ if .Values.config.GCS_BACKUP_BUCKET -}}
+GCS_BACKUP_BUCKET: {{ .Values.config.GCS_BACKUP_BUCKET | quote }}
+{{- end }}
+{{- end }}
+
+
+{{- define "gcs_backup_data" -}}
+{{ if .Values.config.GCS_BACKUPS -}}
+- name: GCS_BACKUPS
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GCS_BACKUPS
+{{- end }}
+{{ if .Values.config.GCS_BACKUP_ACCESS_KEY_ID -}}
+- name: GCS_BACKUP_ACCESS_KEY_ID
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GCS_BACKUP_ACCESS_KEY_ID
+{{- end }}
+{{ if .Values.config.GCS_BACKUP_SECRET_ACCESS_KEY -}}
+- name: GCS_BACKUP_SECRET_ACCESS_KEY
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GCS_BACKUP_SECRET_ACCESS_KEY
+{{- end }}
+{{ if .Values.config.GCS_BACKUP_BUCKET -}}
+- name: GCS_BACKUP_BUCKET
+  valueFrom:
+    configMapKeyRef:
+      name: {{ template "fullname" . }}
+      key: GCS_BACKUP_BUCKET
+{{- end }}
+{{- end }}
+
+
+
+
+

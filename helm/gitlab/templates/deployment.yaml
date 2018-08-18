@@ -1,0 +1,239 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" . }}
+      annotations:
+        checksum/config-map: {{ include (print $.Chart.Name "/templates/configmap.yaml") . | sha256sum }}
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: {{ template "fullname" . }}
+        image: "{{ .Values.image }}:{{ .Values.imageTag }}"
+        imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+        env:
+        {{- if .Values.config.GITLAB_TIMEZONE }}
+        - name: GITLAB_TIMEZONE
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: GITLAB_TIMEZONE
+        {{- end }}
+        {{- if .Values.config.DEBUG }}
+        - name: DEBUG
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: DEBUG
+        {{- end }}
+        - name: GITLAB_SECRETS_DB_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" . }}
+              key: GITLAB_SECRETS_DB_KEY_BASE
+        - name: GITLAB_SECRETS_SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" . }}
+              key: GITLAB_SECRETS_SECRET_KEY_BASE
+        - name: GITLAB_SECRETS_OTP_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" . }}
+              key: GITLAB_SECRETS_OTP_KEY_BASE
+        - name: GITLAB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" . }}
+              key: GITLAB_ROOT_PASSWORD
+        - name: GITLAB_ROOT_EMAIL
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: GITLAB_ROOT_EMAIL
+        - name: GITLAB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: GITLAB_HOST
+        - name: GITLAB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: GITLAB_PORT
+        {{ if .Values.config.GITLAB_SSH_HOST -}}
+        - name: GITLAB_SSH_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: GITLAB_SSH_HOST
+        {{ end }}
+        {{ if .Values.config.GITLAB_SSH_PORT -}}
+        - name: GITLAB_SSH_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: GITLAB_SSH_PORT
+        {{ end }}
+        {{ if .Values.config.GITLAB_RELATIVE_URL_ROOT -}}
+        - name: GITLAB_RELATIVE_URL_ROOT
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: GITLAB_RELATIVE_URL_ROOT
+        {{ end }}
+        {{ if .Values.config.GITLAB_TRUSTED_PROXIES -}}
+        - name: GITLAB_TRUSTED_PROXIES
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: GITLAB_TRUSTED_PROXIES
+        {{ end }}
+        {{ if .Values.config.GITLAB_HTTPS -}}
+        - name: GITLAB_HTTPS
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: GITLAB_HTTPS
+        {{ end }}
+        {{ if .Values.config.GITLAB_SHARED_RUNNERS_REGISTRATION_TOKEN -}}
+        - name: GITLAB_SHARED_RUNNERS_REGISTRATION_TOKEN
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: GITLAB_SHARED_RUNNERS_REGISTRATION_TOKEN
+        {{ end }}
+        - name: DB_ADAPTER
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: DB_ADAPTER
+        - name: DB_ENCODING
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: DB_ENCODING
+        - name: DB_HOST
+          value: {{ template "postgresql.fullname" . }}
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: DB_PORT
+        - name: DB_POOL
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: DB_POOL
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" . }}
+              key: DB_USER
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" . }}
+              key: DB_PASS
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: DB_NAME
+        - name: REDIS_HOST
+          value: {{ template "redis.fullname" . }}
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: REDIS_PORT
+        - name: REDIS_DB_NUMBER
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: REDIS_DB_NUMBER
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" . }}
+              key: REDIS_PASSWORD
+{{- if .Values.config.AWS_BACKUPS }}
+{{ include "aws_backup_data" . | indent 8 }}
+{{- end }}
+{{- if .Values.config.GCS_BACKUPS }}
+{{ include "gcs_backup_data" . | indent 8 }}
+{{- end }}
+{{- if .Values.config.OAUTH_ENABLED }}
+{{ include "oauth_data" . | indent 8 }}
+{{- end }}
+{{- if .Values.config.IMAP_ENABLED }}
+{{ include "imap_data" . | indent 8 }}
+{{- end }}
+{{- if .Values.config.SMTP_ENABLED }}
+{{ include "smtp_data" . | indent 8 }}
+{{- end }}
+{{- if .Values.config.GITLAB_REGISTRY_ENABLED }}
+{{ include "registry_data" . | indent 8 }}
+{{- end }}
+{{- if .Values.config.RACK_ATTACK_ENABLED }}
+{{ include "rack_data" . | indent 8 }}
+{{- end }}
+{{ include "nginx_data" . | indent 8 }}
+{{ include "ssl_data" . | indent 8 }}
+{{ include "email_data" . | indent 8 }}
+{{ include "backup_data" . | indent 8 }}
+{{ include "advanced_data" . | indent 8 }}
+{{ include "pages_data" . | indent 8 }}
+
+        ports:
+        - name: http
+          containerPort: 80
+        - name: ssh
+          containerPort: 22
+        - name: https
+          containerPort: 443
+        livenessProbe:
+          httpGet:
+            path: /help
+            port: 80
+          initialDelaySeconds: 180
+          timeoutSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /help
+            port: 80
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+        volumeMounts:
+        {{ if .Values.registry.enabled }}
+        - name: certs
+          mountPath: /certs
+          readOnly: true
+        {{ end }}
+        - name: gitlab-data
+          mountPath: /home/git/data
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+      volumes:
+      - name: gitlab-data
+      {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ template "fullname" . }}-data
+      {{- else }}
+        emptyDir: {}
+      {{- end }}
+      {{- if .Values.registry.enabled }}
+      - name: certs
+        secret:
+          secretName: {{ default "registry-server-tls" .Values.registry.ingress.secretName }}
+      {{- end }}
