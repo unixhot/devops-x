@@ -34,5 +34,14 @@
 [root@linux-node1 devops-x]# ./install.sh 
 ```
 
+### 4.配置访问解析
 
+由于使用了Ingress，所以需要配置的hosts解析
+```
+192.168.56.11  jenkins.example.com
+192.168.56.11  sonar.example.com
+192.168.56.11  gitlab.example.com
+192.168.56.11  nexus.example.com
+192.168.56.11  redmine.example.com
+```
 
