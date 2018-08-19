@@ -31,7 +31,7 @@ nfs-server-install(){
     yum install -y nfs-utils
     mkdir /data/volumes -p
     echo "/data/volumes 192.168.56.0/24(rw,no_root_squash,no_all_squash,sync,anonuid=501,anongid=501)" >> /etc/exports
-    systemctl start nfs-server
+    systemctl start nfs-server && systemctl enable nfs
 }
 
 push-images(){
