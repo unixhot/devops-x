@@ -17,8 +17,8 @@
 ### 1.准备Kubernetes集群
 
 1. 请参考自动化的部署https://github.com/unixhot/salt-kubernetes
-2. 需要安装CoreDNS、Dashboard、Heapster、Ingress后面所有的DevOps工具链的应用需要绑定hosts进行访问。
-3. 目前在Helm中配置的镜像地址为registry.devopsedu.com所有需要设置hosts解析。
+2. DevOps-X会安装CoreDNS、Dashboard、Heapster、Ingress。
+3. 目前在Helm中配置的镜像地址为registry.devopsedu.com，所以需要在所有节点设置hosts解析。
 ```
 [root@linux-node1 ~]# vim /etc/hosts
 192.168.56.11 registry.devopsedu.com
@@ -26,7 +26,7 @@
 
 ### 2.下载所有的镜像文件
 
-所有的镜像均放置在了百度云盘，下载地址: https://pan.baidu.com/s/1mK6vf1GLqfPD8HYcN7ddbQ
+所有的镜像均放置在了百度云盘，下载地址: https://pan.baidu.com/s/1P4nV8R06jBgfBVEsm9WPgg
 
 ### 3.执行安装脚本
 ```
