@@ -17,7 +17,7 @@
 ### 1.准备Kubernetes集群
 
 1. 请参考自动化的部署https://github.com/unixhot/salt-kubernetes
-2. 需要安装CoreDNS、Dashboard、Heapster、Ingress，后面所有的DevOps工具链的应用需要绑定hosts进行访问。
+2. 需要安装CoreDNS、Dashboard、Heapster、Ingress后面所有的DevOps工具链的应用需要绑定hosts进行访问。
 3. 目前在Helm中配置的镜像地址为registry.devopsedu.com所有需要设置hosts解析。
 ```
 [root@linux-node1 ~]# vim /etc/hosts
@@ -36,12 +36,13 @@
 
 ### 4.配置访问解析
 
-由于使用了Ingress，所以需要配置的hosts解析
+由于使用了Ingress，所以需要配置的hosts解析，实际生产使用，请绑定DNS。
+将192.168.56.12 替换为Node IP。
+C:\Windows\System32\drivers\etc\hosts
 ```
-192.168.56.11  jenkins.example.com
-192.168.56.11  sonar.example.com
-192.168.56.11  gitlab.example.com
-192.168.56.11  nexus.example.com
-192.168.56.11  redmine.example.com
+192.168.56.12  jenkins.example.com
+192.168.56.12  sonar.example.com
+192.168.56.12  gitlab.example.com
+192.168.56.12  nexus.example.com
+192.168.56.12  redmine.example.com
 ```
-
