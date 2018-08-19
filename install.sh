@@ -22,49 +22,29 @@ docker-registry-install(){
     fi
     docker load <./files/images/registry-2.6.2.tar
     mkdir /data/docker-registry -p &&
-    docker run -d -p 5000:5000 -v /data/docker-registry:/var/lib/registry --restart=always --name docker-registry registry.devopsedu.com:5000/devops/registry:2.6.2
-    echo "==>Docker Registry<=="
+    docker run -d -p 5000:5000 -v /data/docker-registry:/var/lib/registry --restart=always --name docker-registry registry.devopsedu.com:5000/k8s/registry:2.6.2
+    echo "======> Docker Registry <======"
     docker ps | grep docker-registry
 }
 
 nfs-server-install(){
     yum install -y nfs-utils
-    echo "/data/volumes 192.168.99.0/24(rw,no_root_squash,no_all_squash,sync,anonuid=501,anongid=501)" >> /etc/exports
+    mkdir /data/volumes -p
+    echo "/data/volumes 192.168.56.0/24(rw,no_root_squash,no_all_squash,sync,anonuid=501,anongid=501)" >> /etc/exports
     systemctl start nfs-server
 }
 
 push-images(){
-    #load images Local
+    echo "======> Load Images Local <======"
     for i in `ls files/images`;
       do docker load -i ./files/images/"$i";
     done
     # Tag And Push To Registry
-    # images load 后的默认是以 registry.devopsedu.com:5000/devops/xxxx 为repository的
-    images_shortname=(
-        nfs-client-provisioner \
-        jenkins                \
-        jnlp-slave-alpine      \
-        gitlab                 \
-        postgresql             \
-        redis                  \
-        minio                  \
-        sonarqube              \
-        redmine                \
-        mysql                  \
-        mariadb                \
-        docker-nexus           \
-        docker-nexus-backup    \
-        docker-nexus-proxy     )
-
-    for shortname in ${images_shortname[*]};
-        do
-        repository=$(docker images | grep $shortname | awk '{print $1}')
-        tagname=$(docker images | grep $shortname | awk '{print $2}')
-        localregistry="${repository}:${tagname}"
-        echo "pushing $shortname ... now"
-        echo "$localregistry"
-        docker push $localregistry
-        done
+    for image in `docker images | awk '{print $1":"$2}' | grep -v "^REPOSITORY"`;do
+        docker push $image
+        docker rmi $image
+    done
+    echo "======> Registry Push Done <======"
 }
 
 helm-install(){
@@ -81,15 +61,20 @@ helm-install(){
 tiller-install(){
     kubectl create serviceaccount --namespace kube-system tiller
     kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
-    helm init -i registry.devopsedu.com:5000/devops/tiller:v2.9.1 --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
+    helm init -i registry.devopsedu.com:5000/k8s/tiller:v2.9.1 --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
     kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
 }
 
 charts-install(){
-    for chart in `ls ./helm/`;
-    do
-        helm install --name $chart ./helm/$chart
-    done 
+    echo "======> App Install <======"
+    sleep 5;
+    kubectl label nodes 192.168.56.12 edgenode=true
+    helm install --name plugins ./helm/plugins
+    helm install --name redmine ./helm/redmine
+    helm install --name gitlab ./helm/gitlab
+    helm install --name jenkins ./helm/jenkins
+    helm install --name sonarqube ./helm/sonarqube
+    helm install --name sonatype-nexus ./helm/sonatype-nexus
 }
 
 main(){
@@ -108,5 +93,3 @@ main(){
 }
 
 main $1
-
-
