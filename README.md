@@ -17,16 +17,24 @@
 ### 1.准备Kubernetes集群
 
 1. 请参考自动化的部署https://github.com/unixhot/salt-kubernetes
-2. 需要安装CoreDNS、Dashboard、Heapster、Ingress后面所有的DevOps工具链的应用需要绑定hosts进行访问。
-3. 目前在Helm中配置的镜像地址为registry.devopsedu.com所有需要设置hosts解析。
+2. 三台虚拟机建议的最小内存是4G，内存过低会导致Pod无法调度。
+3. DevOps-X会安装CoreDNS、Dashboard、Heapster、Ingress，只需要部署好Kubernetes集群即可。
+3. 目前在Helm中配置的镜像地址为registry.devopsedu.com，所以需要在所有节点设置hosts解析。
 ```
 [root@linux-node1 ~]# vim /etc/hosts
 192.168.56.11 registry.devopsedu.com
+
+[root@linux-node2 ~]# vim /etc/hosts
+192.168.56.11 registry.devopsedu.com
+
+[root@linux-node3 ~]# vim /etc/hosts
+192.168.56.11 registry.devopsedu.com
+
 ```
 
 ### 2.下载所有的镜像文件
 
-所有的镜像均放置在了百度云盘，下载地址: https://pan.baidu.com/s/1mK6vf1GLqfPD8HYcN7ddbQ
+所有的镜像均放置在了百度云盘，下载地址: https://pan.baidu.com/s/1P4nV8R06jBgfBVEsm9WPgg
 
 ### 3.执行安装脚本
 ```
@@ -45,4 +53,16 @@ C:\Windows\System32\drivers\etc\hosts
 192.168.56.12  gitlab.example.com
 192.168.56.12  nexus.example.com
 192.168.56.12  redmine.example.com
+```
+
+### 5.查看访问详情
+
+查看安装的应用
+```
+[root@linux-node1 ~]# helm ls
+```
+查看访问详情
+```
+[root@linux-node1 ~]# helm status redmine
+
 ```
