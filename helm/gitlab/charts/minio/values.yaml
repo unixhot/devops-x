@@ -1,11 +1,27 @@
 ## Set default image, imageTag, and imagePullPolicy. mode is used to indicate the
+##
+image:
+  repository: minio/minio
+  tag: RELEASE.2018-07-10T01-42-11Z
+  pullPolicy: IfNotPresent
+
+## Set default image, imageTag, and imagePullPolicy for the `mc` (the minio
+## client used to create a default bucket).
+##
+mcImage:
+  repository: minio/mc
+  tag: RELEASE.2018-06-09T02-18-09Z
+  pullPolicy: IfNotPresent
+
 ## minio server mode, i.e. standalone or distributed.
 ## Distributed Minio ref: https://docs.minio.io/docs/distributed-minio-quickstart-guide
 ##
-image: "registry.devopsedu.com:5000/devops/minio"
-imageTag: "RELEASE.2017-03-16T21-50-32Z"
-imagePullPolicy: "Always"
-mode: "standalone"
+mode: standalone
+
+## Pod priority settings
+## ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/
+##
+priorityClassName: ""
 
 ## Set default accesskey, secretkey, Minio config file path, volume mount path and
 ## number of nodes (only used for Minio distributed mode)
@@ -13,14 +29,9 @@ mode: "standalone"
 ##
 accessKey: "AKIAIOSFODNN7EXAMPLE"
 secretKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
-configPath: ""
+configPath: "/root/.minio/"
 mountPath: "/export"
 replicas: 4
-
-## loadBalancerIP for the Minio Service (optional, cloud specific)
-## ref: http://kubernetes.io/docs/user-guide/services/#type-loadbalancer
-##
-# minioLoadBalancerIP:
 
 ## Enable persistence using Persistent Volume Claims
 ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
@@ -28,20 +39,64 @@ replicas: 4
 persistence:
   enabled: true
 
-  ## If defined, volume.beta.kubernetes.io/storage-class: <storageClass>
-  ## Default: volume.alpha.kubernetes.io/storage-class: default
+  ## A manually managed Persistent Volume and Claim
+  ## Requires persistence.enabled: true
+  ## If defined, PVC must be created manually before volume will be bound
+  # existingClaim:
+
+  ## minio data Persistent Volume Storage Class
+  ## If defined, storageClassName: <storageClass>
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
   ##
-  # storageClass: <storageClass>
+  ## Storage class of PV to bind. By default it looks for standard storage class.
+  ## If the PV uses a different storage class, specify that here.
+  # storageClass: standard
   storageClass: "nfs-dynamic-class"
   accessMode: ReadWriteOnce
   size: 10Gi
+
+  ## If subPath is set mount a sub folder of a volume instead of the root of the volume.
+  ## This is especially handy for volume plugins that don't natively support sub mounting (like glusterfs).
+  ##
+  subPath: ""
 
 ## Expose the Minio service to be accessed from outside the cluster (LoadBalancer service).
 ## or access it from within the cluster (ClusterIP service). Set the service type and the port to serve it.
 ## ref: http://kubernetes.io/docs/user-guide/services/
 ##
-serviceType: LoadBalancer
-servicePort: 9000
+
+service:
+  type: ClusterIP
+  clusterIP: None
+  port: 9000
+  # nodePort: 31311
+  annotations: {}
+    # prometheus.io/scrape: 'true'
+    # prometheus.io/path:   '/minio/prometheus/metrics'
+    # prometheus.io/port:   '9000'
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+    - chart-example.local
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+## Node labels for pod assignment
+## Ref: https://kubernetes.io/docs/user-guide/node-selection/
+##
+nodeSelector: {}
+tolerations: []
+affinity: {}
 
 ## Configure resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
@@ -51,16 +106,65 @@ resources:
     memory: 256Mi
     cpu: 250m
 
-## Below settings can be used to setup event notifications as explained here.
-## https://docs.minio.io/docs/minio-bucket-notification-guide
+## Create a bucket after minio install
 ##
+defaultBucket:
+  enabled: false
+  ## If enabled, must be a string with length > 0
+  name: bucket
+  ## Can be one of none|download|upload|public
+  policy: none
+  ## Purge if bucket exists already
+  purge: false
+
+## Use minio as an azure blob gateway, you should disable data persistence so no volume claim are created.
+## https://docs.minio.io/docs/minio-gateway-for-azure
+azuregateway:
+  enabled: false
+
+## Use minio as GCS (Google Cloud Storage) gateway, you should disable data persistence so no volume claim are created.
+## https://docs.minio.io/docs/minio-gateway-for-gcs
+
+gcsgateway:
+  enabled: false
+  # credential json file of service account key
+  gcsKeyJson: ""
+  # Google cloud project-id
+  projectId: ""
+
+## Use minio on NAS backend
+## https://docs.minio.io/docs/minio-gateway-for-nas
+
+nasgateway:
+  enabled: false
+  # Number of parallel instances
+  replicas: 4
+  # Generally for NAS Gateway, you'd like to bind the PVC to a specific PV. To ensure that happens, PV to bind to should have
+  # a label like "pv: <value>", use value here.
+  pv: ""
+
+## https://docs.minio.io/docs/minio-bucket-notification-guide
+## https://github.com/minio/minio/blob/master/docs/config
 minioConfig:
+  region: "us-east-1"
+  browser: "on"
+  domain: ""
+  worm: "off"
+  storageClass:
+    standardStorageClass: ""
+    reducedRedundancyStorageClass: ""
+  cache:
+    drives: []
+    expiry: 90
+    maxuse: 80
+    exclude: []
   aqmp:
     enable: false
     url: ""
     exchange: ""
     routingKey: ""
     exchangeType: ""
+    deliveryMode: 0
     mandatory: false
     immediate: false
     durable: false
@@ -83,15 +187,18 @@ minioConfig:
     maxPubAcksInflight: 0
   elasticsearch:
     enable: false
+    format: "namespace"
     url: ""
     index: ""
   redis:
     enable: false
+    format: "namespace"
     address: ""
     password: ""
     key: ""
   postgresql:
     enable: false
+    format: "namespace"
     connectionString: ""
     table: ""
     host: ""
@@ -106,3 +213,26 @@ minioConfig:
   webhook:
     enable: false
     endpoint: ""
+  mysql:
+    enable: false
+    format: "namespace"
+    dsnString: ""
+    table: ""
+    host: ""
+    port: ""
+    user: ""
+    password: ""
+    database: ""
+  mqtt:
+    enable: false
+    broker: ""
+    topic: ""
+    qos: 0
+    clientId: ""
+    username: ""
+    password: ""
+    reconnectInterval: 0
+    keepAliveInterval: 0
+networkPolicy:
+  enabled: false
+  allowExternal: true
