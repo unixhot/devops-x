@@ -122,7 +122,7 @@ postgresql:
 ##
 mysql:
   # Enable to deploy the mySQL chart
-  enabled: true
+  enabled: false
   # To use an external mySQL instance, set enabled to false and uncomment
   # the line below:
   # mysqlServer: ""
