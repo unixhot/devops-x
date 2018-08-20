@@ -38,6 +38,7 @@
 
 ### 3.修改配置文件
 
+```
 [root@linux-node1 devops-x]# vim config/devopsx.conf 
 #NFS server IP 目前仅支持把NFS启动在Master节点，可以自行修改
 nfs_server=192.168.56.11
@@ -47,6 +48,7 @@ nfs_client="192.168.56.0/24"
 
 #treafik node IP    #设置再哪个节点上启动Treafik，多个节点执行设置label即可。
 edgenode="192.168.56.12"
+```
 
 ### 4.执行安装脚本
 ```
