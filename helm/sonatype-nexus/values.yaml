@@ -7,13 +7,13 @@ nexus:
   imagePullPolicy: IfNotPresent
   env:
     - name: install4jAddVmParams
-      value: "-Xms1200M -Xmx1200M -XX:MaxDirectMemorySize=2G -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+      value: "-Xms512M -Xmx512M -XX:MaxDirectMemorySize=512M -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
   # nodeSelector:
   #   cloud.google.com/gke-nodepool: default-pool
   resources: 
     requests:
       cpu: 250m
-      memory: 4800Mi
+      memory: 512Mi
     # requests:
       ## Based on https://support.sonatype.com/hc/en-us/articles/115006448847#mem
       ## and https://twitter.com/analytically/status/894592422382063616:
