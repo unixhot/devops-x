@@ -36,13 +36,25 @@
 
 所有的镜像均放置在了百度云盘，下载地址: https://pan.baidu.com/s/1P4nV8R06jBgfBVEsm9WPgg
 
-### 3.执行安装脚本
+### 3.修改配置文件
+
+[root@linux-node1 devops-x]# vim config/devopsx.conf 
+#NFS server IP 目前仅支持把NFS启动在Master节点，可以自行修改
+nfs_server=192.168.56.11
+
+#NFS client IP range  设置NFS访问权限
+nfs_client="192.168.56.0/24"
+
+#treafik node IP    #设置再哪个节点上启动Treafik，多个节点执行设置label即可。
+edgenode="192.168.56.12"
+
+### 4.执行安装脚本
 ```
 [root@linux-node1 ~]# cd devops-x
 [root@linux-node1 devops-x]# ./install.sh deploy
 ```
 
-### 4.配置访问解析
+### 5.配置访问解析
 
 由于使用了Ingress，所以需要配置的hosts解析，实际生产使用，请绑定DNS。
 将192.168.56.12 替换为Node IP。
@@ -55,7 +67,7 @@ C:\Windows\System32\drivers\etc\hosts
 192.168.56.12  redmine.example.com
 ```
 
-### 5.查看访问详情
+### 6.查看访问详情
 
 查看安装的应用
 ```
