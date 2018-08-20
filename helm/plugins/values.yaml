@@ -1,1 +1,5 @@
 ---
+nfs-provisioner:
+  enable: true
+  nfs-server: "__nfs_server__"
+

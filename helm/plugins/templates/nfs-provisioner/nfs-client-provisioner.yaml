@@ -68,13 +68,13 @@ spec:
               # 此处供应者名字供storageclass调用
               value: nfs-prov-1
             - name: NFS_SERVER
-              value: 192.168.56.11
+              value: {{ .Values.nfs-provisioner.nfs-server }}
             - name: NFS_PATH
               value: /data/volumes
       volumes:
         - name: nfs-client-root
           nfs:
-            server: 192.168.56.11
+            server: {{ .Values.nfs-provisioner.nfs-server }}
             path: /data/volumes
 
 ---
