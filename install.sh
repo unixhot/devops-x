@@ -53,7 +53,7 @@ check_k8s(){
 }
 
 
-docker-registry-install(){
+docker_registry_install(){
     docker --version
     if [ "$?" -ne 0 ];then
         action "docker installd failed" /bin/false
@@ -71,14 +71,14 @@ load_config(){
 }
 
 
-nfs-server-install(){
+nfs_server_install(){
     yum install -y nfs-utils
     mkdir /data/volumes -p
     echo "/data/volumes ${nfs_client}(rw,no_root_squash,no_all_squash,sync,anonuid=501,anongid=501)" >> /etc/exports
     systemctl start nfs-server && systemctl enable nfs
 }
 
-push-images(){
+push_images(){
     green_color "======> Load Images Local <======"
     for i in `ls files/images`;
       do docker load -i ./files/images/"$i";
@@ -91,7 +91,7 @@ push-images(){
     green_color "======> Registry Push Done <======"
 }
 
-helm-install(){
+helm_install(){
     HELM_PACKAGE="./files/packages/helm-v2.9.1-linux-amd64.tar.gz"
     helm_status=`which helm`
     if [ "$?" -eq 0 ];then
@@ -102,7 +102,7 @@ helm-install(){
     fi
 }
 
-tiller-install(){
+tiller_install(){
     green_color "======> Tiller Install <======"
     kubectl create serviceaccount --namespace kube-system tiller
     kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
@@ -117,7 +117,7 @@ tiller-install(){
     fi
 }
 
-charts-install(){
+charts_install(){
     green_color "======> App Install <======"
     sleep 5;
     kubectl label nodes ${edgenode} edgenode=true
@@ -140,12 +140,12 @@ main(){
     deploy)
         check_k8s;
         load_config;
-    	docker-registry-install;
-    	nfs-server-install;
-    	push-images;
-        helm-install;
-    	tiller-install;
-    	charts-install;
+    	docker_registry_install;
+    	nfs_server_install;
+    	push_images;
+        helm_install;
+    	tiller_install;
+    	charts_install;
                 ;;
     *) usage
         exit 1;

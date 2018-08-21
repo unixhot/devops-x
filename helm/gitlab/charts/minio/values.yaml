@@ -1,7 +1,7 @@
 ## Set default image, imageTag, and imagePullPolicy. mode is used to indicate the
 ##
 image:
-  repository: minio/minio
+  repository: registry.devopsedu.com:5000/devops/minio
   tag: RELEASE.2018-07-10T01-42-11Z
   pullPolicy: IfNotPresent
 

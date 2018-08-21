@@ -100,7 +100,7 @@ postgresql:
 ## ref: https://github.com/kubernetes/charts/blob/master/stable/redis/README.md
 ##
 redis:
-  image: redis:3.2
+  image: registry.devopsedu.com:5000/devops/redis:3.2
 
   redisPassword: "gitlabRedis"
   resources:
@@ -113,7 +113,7 @@ redis:
 
 minio:
   # https://hub.docker.com/r/minio/minio/tags/
-  imageTag: "RELEASE.2017-03-16T21-50-32Z"
+  imageTag: "RELEASE.2018-07-10T01-42-11Z"
   mode: "standalone"
   # accessKey: "AKIAIOSFODNN7EXAMPLE"
   # secretKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
