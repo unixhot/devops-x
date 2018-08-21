@@ -7,6 +7,7 @@
 ## 版本明细 v1.0 Beta
 
 - 集成Redmine、Gitlab、Jenkins、SonarQube、Nexus
+- 目前测试通过系统CentOS 7.4，Kubernetes版本v1.10.3
 
 ## 案例架构图
 
@@ -34,13 +35,15 @@
 
 ### 2.下载所有的镜像文件
 
-所有的镜像均放置在了百度云盘，下载地址: https://pan.baidu.com/s/1P4nV8R06jBgfBVEsm9WPgg
+所有的镜像均放置在了百度云盘，大小2.17G，解压后大小5～6G，请确认好磁盘空间。至少需要20G的可用磁盘容量。
+
+下载地址: https://pan.baidu.com/s/1cufue7ECywQrjYck4HTQVg  
 
 ### 3.修改配置文件
 
 ```
 [root@linux-node1 devops-x]# vim config/devopsx.conf 
-#NFS server IP 目前仅支持把NFS启动在Master节点，可以自行修改
+#NFS server IP 目前仅支持把NFS启动在Master节点，可以自行修改。
 nfs_server=192.168.56.11
 
 #NFS client IP range  设置NFS访问权限
@@ -59,7 +62,7 @@ edgenode="192.168.56.12"
 ### 5.配置访问解析
 
 由于使用了Ingress，所以需要配置的hosts解析，实际生产使用，请绑定DNS。
-将192.168.56.12 替换为Node IP。
+将192.168.56.12 替换为edgeNode IP。
 C:\Windows\System32\drivers\etc\hosts
 ```
 192.168.56.12  jenkins.example.com
@@ -75,7 +78,7 @@ C:\Windows\System32\drivers\etc\hosts
 ```
 [root@linux-node1 ~]# helm ls
 ```
-查看访问详情
+查看访问详情，可以根据输出，获取访问的用户名和密码。
 ```
 [root@linux-node1 ~]# helm status redmine
 
