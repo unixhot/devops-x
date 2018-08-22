@@ -83,3 +83,9 @@ C:\Windows\System32\drivers\etc\hosts
 [root@linux-node1 ~]# helm status redmine
 
 ```
+
+### 培训教学
+
+- 目前DevOps学院已经上线《基于Kubernetes构建企业容器云》的【入门实战篇】和【进阶提高篇】
+- 【DevOps学院】 http://www.devopsedu.com/
+
