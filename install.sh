@@ -109,17 +109,24 @@ tiller_install(){
     helm init -i registry.devopsedu.com:5000/k8s/tiller:v2.9.1 --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
     kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
     sleep 5;
-    helm version
-    if [ "$?" -eq 0 ];then
-       green_color "Tiller install ok"
+    tiller_status=""
+    wait_time=0
+    until [ "$tiller_status" == "Running" ] || [ "$wait_time" == "120" ];
+    do
+        sleep 5
+        tiller_status=$(kubectl get pod -n kube-system|grep "tiller"|awk '{print $3}')
+        wait_time=$(($wait_time+5))
+    done
+    if [ "$tiiler_status" == "Running" ];then
+       green_color "Tiller install ok in $wait_time seconds"
     else
        red_color "Tiller install failed"
+       exit 6
     fi
 }
 
 charts_install(){
     green_color "======> App Install <======"
-    sleep 5;
     kubectl label nodes ${edgenode} edgenode=true
     green_color "======> Plugins Install <======"
     helm install --name plugins ./helm/plugins
