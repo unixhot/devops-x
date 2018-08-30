@@ -1,0 +1,57 @@
+OpenLdap:
+  Image: "docker.io/osixia/openldap"
+  ImageTag: "1.2.0"
+  ImagePullPolicy: "Always"
+  Component: "openldap"
+
+  Replicas: 1
+
+  Cpu: "512m"
+  Memory: "200Mi"
+
+  Domain: "example.com"
+  AdminPassword: "admin"
+  Https: "false"
+
+  tolerations:
+   # - key: taintKey
+   #   value: taintValue
+   #   operator: Equal
+   #   effect: NoSchedule
+
+  scheduling:
+    affinity:
+      node:
+        type: #requiredDuringSchedulingIgnoredDuringExecution
+        labels:
+        # - key: iamalabelkey
+        #   operator: In
+        #   values: ["value1", "value2"]
+
+PhpLdapAdmin:
+  Image: "docker.io/osixia/phpldapadmin"
+  ImageTag: "0.6.12"
+  ImagePullPolicy: "Always"
+  Component: "phpadmin"
+
+  Replicas: 1
+
+  NodePort: 31080
+  #LdapEndpoint: ldap.example.com:30389
+
+  Cpu: "512m"
+  Memory: "200Mi"
+
+  tolerations:
+   # - key: taintKey
+   #   value: taintValue
+   #   operator: Equal
+   #   effect: NoSchedule
+  scheduling:
+    affinity:
+      node:
+        type: #requiredDuringSchedulingIgnoredDuringExecution
+        labels:
+        # - key: iamalabelkey
+        #   operator: In
+        #   values: ["value1", "value2"]

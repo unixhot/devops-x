@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Release.Name}}-admin
+spec:
+{{- if .Values.PhpLdapAdmin.NodePort }}
+  type: NodePort
+{{- end }}
+  ports:
+  - port: 80
+    targetPort: 80
+{{- if .Values.PhpLdapAdmin.NodePort }}
+    nodePort: 31080
+{{- end }}
+  selector:
+    app: {{.Release.Name}}-admin
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{.Release.Name}}-admin
+spec:
+  replicas: {{.Values.OpenLdap.Replicas}}
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name}}-admin
+    spec:
+      containers:
+      - name: {{.Release.Name}}-admin
+        image: {{.Values.PhpLdapAdmin.Image}}:{{.Values.PhpLdapAdmin.ImageTag}}
+        ports:
+          - containerPort: 80
+        env:
+        - name: PHPLDAPADMIN_HTTPS
+          value: "{{.Values.OpenLdap.Https}}"
+        - name: PHPLDAPADMIN_LDAP_HOSTS
+          value: "{{.Values.PhpLdapAdmin.LdapEndpoint | default .Release.Name}}"
+      {{- if .Values.PhpLdapAdmin.tolerations }}
+      tolerations:
+      {{- range .Values.PhpLdapAdmin.tolerations }}
+      - key: {{ .key | default ("") }}
+        value: {{ .value | default ("")}}
+        operator: {{ .operator | default ("Equal") }}
+        effect: {{ .effect  | default ("")}}
+      {{- end }}
+      {{- end }}
+      {{- if .Values.PhpLdapAdmin.scheduling.affinity }}
+      {{- if .Values.PhpLdapAdmin.scheduling.affinity.node }}
+      {{- if .Values.PhpLdapAdmin.scheduling.affinity.node.labels }}
+      affinity:
+        nodeAffinity:
+          {{ .Values.PhpLdapAdmin.scheduling.affinity.node.type }}:
+            nodeSelectorTerms:
+            - matchExpressions:
+                {{- range .Values.PhpLdapAdmin.scheduling.affinity.node.labels }}
+                - key: {{ .key }}
+                  operator: {{ .operator }}
+                  values:
+                  {{- range .values }}
+                  - {{ . }}
+                  {{- end }}
+                {{- end }}
+      {{- end }}
+      {{- end }}
+      {{- end }}
