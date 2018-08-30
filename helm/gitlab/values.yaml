@@ -132,6 +132,22 @@ config:
   GITLAB_HTTPS: "false"
   GITLAB_SSH_PORT: "22"
   GITLAB_SHARED_RUNNERS_REGISTRATION_TOKEN: "4CAi770WqUUVgYzyGmeS0PbGqcpTKl8XLVZfRZom"
+  LDAP_ENABLED: "true"
+  LDAP_LABEL: "LDAP"
+  LDAP_HOST: "openldap.default.svc.cluster.local"
+  LDAP_PORT: "389"
+  LDAP_UID: "uid"
+  LDAP_METHOD: "plain"
+  LDAP_VERIFY_SSL: "false"
+  LDAP_BIND_DN: "cn=admin,dc=example,dc=com"
+  LDAP_PASS: "admin"
+  LDAP_TIMEOUT: "10"
+  LDAP_ACTIVE_DIRECTORY: "false"
+  LDAP_ALLOW_USERNAME_OR_EMAIL_LOGIN: "false"
+  LDAP_BLOCK_AUTO_CREATED_USERS: "false"
+  LDAP_BASE: "dc=example,dc=com"
+  LDAP_USER_FILTER: ""
+
 
 
 runner:
