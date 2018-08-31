@@ -1,0 +1,77 @@
+OpenLdap.apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Release.Name}}
+spec:
+  ports:
+  - name: ldap
+    port: 389
+    targetPort: 389
+  - name: ldap-ssl
+    port: 636
+    targetPort: 636
+  selector:
+    app: {{.Release.Name}}
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{.Release.Name}}
+spec:
+  replicas: {{.Values.OpenLdap.Replicas}}
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name}}
+    spec:
+      containers:
+      - name: {{.Release.Name}}
+        image: {{.Values.OpenLdap.Image}}:{{.Values.OpenLdap.ImageTag}}
+        ports:
+          - containerPort: 389
+          - containerPort: 636
+        env:
+        - name: LDAP_DOMAIN
+          value: {{.Values.OpenLdap.Domain}}
+        - name: LDAP_ADMIN_PASSWORD
+          value: {{.Values.OpenLdap.AdminPassword}}
+        volumeMounts:
+          - name: ldapdata
+            mountPath: /var/lib/ldap
+          - name: sldapdata
+            mountPath: /etc/ldap/slapd.d
+      volumes:
+        - name: ldapdata
+          persistentVolumeClaim:
+            claimName: ldapdataclaim
+        - name: sldapdata
+          persistentVolumeClaim:
+            claimName: sldapdataclaim
+      {{- if .Values.OpenLdap.tolerations }}
+      tolerations:
+      {{- range .Values.OpenLdap.tolerations }}
+      - key: {{ .key | default ("") }}
+        value: {{ .value | default ("")}}
+        operator: {{ .operator | default ("Equal") }}
+        effect: {{ .effect  | default ("")}}
+      {{- end }}
+      {{- end }}
+      {{- if .Values.OpenLdap.scheduling.affinity }}
+      {{- if .Values.OpenLdap.scheduling.affinity.node }}
+      {{- if .Values.OpenLdap.scheduling.affinity.node.labels }}
+      affinity:
+        nodeAffinity:
+          {{ .Values.OpenLdap.scheduling.affinity.node.type }}:
+            nodeSelectorTerms:
+            - matchExpressions:
+                {{- range .Values.OpenLdap.scheduling.affinity.node.labels }}
+                - key: {{ .key }}
+                  operator: {{ .operator }}
+                  values:
+                  {{- range .values }}
+                  - {{ . }}
+                  {{- end }}
+                {{- end }}
+      {{- end }}
+      {{- end }}
+      {{- end }}

@@ -41,6 +41,9 @@ LDAP_BASE: {{ .Values.config.LDAP_BASE | quote }}
 {{ if .Values.config.LDAP_USER_FILTER -}}
 LDAP_USER_FILTER: {{ .Values.config.LDAP_USER_FILTER | quote }}
 {{- end }}
+{{ if .Values.config.LDAP_VERIFY_SSL -}}
+LDAP_VERIFY_SSL: {{ .Values.config.LDAP_VERIFY_SSL | quote }}
+{{- end }}
 {{- end }}
 
 {{- define "ldap_data" -}}

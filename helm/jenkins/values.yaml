@@ -91,6 +91,8 @@ Master:
     - credentials-binding:1.16
     - git:3.9.0
     - gitlab:1.5.6
+    - ldap:1.2.0
+    - ldapemail-plugin:0.8
   # Used to approve a list of groovy functions in pipelines used the script-security plugin. Can be viewed under /scriptApproval
   # ScriptApproval:
   #   - "method groovy.json.JsonSlurperClassic parseText java.lang.String"

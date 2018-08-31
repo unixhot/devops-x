@@ -167,6 +167,112 @@ spec:
             secretKeyRef:
               name: {{ template "fullname" . }}
               key: REDIS_PASSWORD
+        {{ if .Values.config.LDAP_ENABLED -}}
+        - name: LDAP_ENABLED
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: LDAP_ENABLED
+        {{- end }}
+        {{ if .Values.config.LDAP_LABEL -}}
+        - name: LDAP_LABEL
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: LDAP_LABEL
+        {{- end }}
+        {{ if .Values.config.LDAP_HOST -}}
+        - name: LDAP_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: LDAP_HOST
+        {{- end }}
+        {{ if .Values.config.LDAP_PORT -}}
+        - name: LDAP_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: LDAP_PORT
+        {{- end }}
+        {{ if .Values.config.LDAP_UID -}}
+        - name: LDAP_UID
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: LDAP_UID
+        {{- end }}
+        {{ if .Values.config.LDAP_METHOD -}}
+        - name: LDAP_METHOD
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: LDAP_METHOD
+        {{- end }}
+        {{ if .Values.config.LDAP_BIND_DN -}}
+        - name: LDAP_BIND_DN
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: LDAP_BIND_DN
+        {{- end }}
+        {{ if .Values.config.LDAP_PASS -}}
+        - name: LDAP_PASS
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: LDAP_PASS
+        {{- end }}
+        {{ if .Values.config.LDAP_TIMEOUT -}}
+        - name: LDAP_TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: LDAP_TIMEOUT
+        {{- end }}
+        {{ if .Values.config.LDAP_VERIFY_SSL -}}
+        - name: LDAP_VERIFY_SSL
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: LDAP_VERIFY_SSL
+        {{- end }}
+        {{ if .Values.config.LDAP_ACTIVE_DIRECTORY -}}
+        - name: LDAP_ACTIVE_DIRECTORY
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: LDAP_ACTIVE_DIRECTORY
+        {{- end }}
+        {{ if .Values.config.LDAP_ALLOW_USERNAME_OR_EMAIL_LOGIN -}}
+        - name: LDAP_ALLOW_USERNAME_OR_EMAIL_LOGIN
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: LDAP_ALLOW_USERNAME_OR_EMAIL_LOGIN
+        {{- end }}
+        {{ if .Values.config.LDAP_BLOCK_AUTO_CREATED_USERS -}}
+        - name: LDAP_BLOCK_AUTO_CREATED_USERS
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: LDAP_BLOCK_AUTO_CREATED_USERS
+        {{- end }}
+        {{ if .Values.config.LDAP_BASE -}}
+        - name: LDAP_BASE
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: LDAP_BASE
+        {{- end }}
+        {{ if .Values.config.LDAP_USER_FILTER -}}
+        - name: LDAP_USER_FILTER
+          valueFrom:
+            configMapKeyRef:
+              name: {{ template "fullname" . }}
+              key: LDAP_USER_FILTER
+        {{- end }}
+
 {{- if .Values.config.AWS_BACKUPS }}
 {{ include "aws_backup_data" . | indent 8 }}
 {{- end }}

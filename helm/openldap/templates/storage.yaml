@@ -1,0 +1,28 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: ldapdataclaim
+spec:
+{{- if .Values.storage_class_name_ldap }}
+  storageClassName: {{ .Values.storage_class_name_ldap | quote }}
+{{- end }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: sldapdataclaim
+spec:
+{{- if .Values.storage_class_name_sldap }}
+  storageClassName: {{ .Values.storage_class_name_sldap | quote }}
+{{- end }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
