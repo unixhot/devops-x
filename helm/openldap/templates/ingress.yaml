@@ -1,0 +1,23 @@
+{{- if .Values.PhpLdapAdmin.ingress.enabled -}}
+{{- $releaseName := .Release.Name -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}-admin"
+  name: "{{.Release.Name}}-admin"
+spec:
+  rules:
+  {{- range .Values.PhpLdapAdmin.ingress.hosts }}
+    - host: {{ . }}
+      http:
+        paths:
+          - path: "/"
+            backend:
+              serviceName: {{ printf "%s-%s" $releaseName "admin" }}
+              servicePort: 80
+  {{- end }}
+{{- end -}}
+
