@@ -27,6 +27,8 @@ OpenLdap:
         # - key: iamalabelkey
         #   operator: In
         #   values: ["value1", "value2"]
+  storage_class_name_sldap: "nfs-dynamic-class"
+  storage_class_name_ldap: "nfs-dynamic-class"
 
 PhpLdapAdmin:
   Image: "docker.io/osixia/phpldapadmin"
