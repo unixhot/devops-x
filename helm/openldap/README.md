@@ -56,7 +56,7 @@ PhpLdapAdmin:
   Replicas: 1
 
   NodePort: 31080
-  #LdapEndpoint: kube-1.local.io:30389
+  
 
   Cpu: "512m"
   Memory: "200Mi"
@@ -66,7 +66,7 @@ PhpLdapAdmin:
 1. From your browser, access to PHPAdmin
 2. login to ldap
   Login DN :
-    cn=admin,dc=local,dc=io
+    cn=admin,dc=example,dc=com
   Password :
     admin
 
