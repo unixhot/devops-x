@@ -37,8 +37,12 @@ PhpLdapAdmin:
   Component: "phpadmin"
 
   Replicas: 1
+  ingress:
+    enabled: true
 
-  NodePort: 31080
+    hosts:
+      - ldapadmin.example.com
+  NodePort: ""
   #LdapEndpoint: ldap.example.com:30389
 
   Cpu: "512m"

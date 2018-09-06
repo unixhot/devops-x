@@ -130,6 +130,8 @@ charts_install(){
     kubectl label nodes ${edgenode} edgenode=true
     green_color "======> Plugins Install <======"
     helm install --name plugins ./helm/plugins
+    green_color "======> OpenLDAP Install <======"
+    helm install --name openldap ./helm/openldap
     green_color "======> Redmine Install <======"
     helm install --name redmine ./helm/redmine
     green_color "======> Gitlab Install <======"
