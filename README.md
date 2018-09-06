@@ -35,9 +35,9 @@
 
 ### 2.下载所有的镜像文件
 
-所有的镜像均放置在了百度云盘，大小2.17G，解压后大小5～6G，请确认好磁盘空间。至少需要20G的可用磁盘容量。
+所有的镜像均放置在了百度云盘，大小2.33G，解压后大小5～6G，请确认好磁盘空间。至少需要20G的可用磁盘容量。
 
-下载地址: https://pan.baidu.com/s/1cufue7ECywQrjYck4HTQVg  
+下载地址: https://pan.baidu.com/s/1V2ZFsj36tjn7ONee4_WgFw  
 
 ### 3.修改配置文件
 
@@ -70,6 +70,7 @@ C:\Windows\System32\drivers\etc\hosts
 192.168.56.12  gitlab.example.com
 192.168.56.12  nexus.example.com
 192.168.56.12  redmine.example.com
+192.168.56.12  ldapadmin.example.com
 ```
 
 ### 6.查看访问详情
