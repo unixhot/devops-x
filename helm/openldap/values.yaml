@@ -9,7 +9,7 @@ OpenLdap:
   Cpu: "512m"
   Memory: "200Mi"
 
-  Domain: "example.com"
+  Domain: "devopsedu.com"
   AdminPassword: "admin"
   Https: "false"
 
@@ -41,9 +41,9 @@ PhpLdapAdmin:
     enabled: true
 
     hosts:
-      - ldapadmin.example.com
+      - ldapadmin.devopsedu.com
   NodePort: ""
-  #LdapEndpoint: ldap.example.com:30389
+  #LdapEndpoint: ldap.devopsedu.com:30389
 
   Cpu: "512m"
   Memory: "200Mi"

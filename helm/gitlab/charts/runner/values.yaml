@@ -29,7 +29,7 @@ resources:
     cpu: 500m
 
 
-# gitlabUrl: "https://gitlab.example.com/ci/"
+# gitlabUrl: "https://gitlab.devopsedu.com/ci/"
 # token: ""
 # registrationToken: ""
 

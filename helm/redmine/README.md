@@ -62,7 +62,7 @@ The following table lists the configurable parameters of the Redmine chart and t
 | `image.pullSecrets`               | Specify image pull secrets               | `nil`                                                   |
 | `redmineUsername`                 | User of the application                  | `user`                                                  |
 | `redminePassword`                 | Application password                     | _random 10 character long alphanumeric string_          |
-| `redmineEmail`                    | Admin email                              | `user@example.com`                                      |
+| `redmineEmail`                    | Admin email                              | `user@devopsedu.com`                                      |
 | `redmineLanguage`                 | Redmine default data language            | `en`                                                    |
 | `extraVars`                       | Environment variables, passed to redmine | `nil`                                                   |
 | `smtpHost`                        | SMTP host                                | `nil`                                                   |

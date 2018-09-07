@@ -70,12 +70,12 @@ edgenode="192.168.56.12"
 将192.168.56.12 替换为edgeNode IP。
 C:\Windows\System32\drivers\etc\hosts
 ```
-192.168.56.12  jenkins.example.com
-192.168.56.12  sonar.example.com
-192.168.56.12  gitlab.example.com
-192.168.56.12  nexus.example.com
-192.168.56.12  redmine.example.com
-192.168.56.12  ldapadmin.example.com
+192.168.56.12  jenkins.devopsedu.com
+192.168.56.12  sonar.devopsedu.com
+192.168.56.12  gitlab.devopsedu.com
+192.168.56.12  nexus.devopsedu.com
+192.168.56.12  redmine.devopsedu.com
+192.168.56.12  ldapadmin.devopsedu.com
 ```
 
 ### 6.查看访问详情

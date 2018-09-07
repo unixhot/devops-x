@@ -10,7 +10,7 @@
 
 ```
   ...
-  Domain: "example.com"      ## 生产使用的Domain
+  Domain: "devopsedu.com"      ## 生产使用的Domain
   AdminPassword: "admin"     ## 管理员账户密码
   Https: "false"             ## 是否启用HTTPS
   ...
@@ -27,7 +27,7 @@ PhpLdapAdmin:
     enabled: true
 
     hosts:
-      - ldapadmin.example.com   ## phpldapadmin访问域名
+      - ldapadmin.devopsedu.com   ## phpldapadmin访问域名
 ```
 
 修改完之后，保存

@@ -16,7 +16,7 @@ imageTag: "2.6.2"
 
 httpPort: 5000
 logLevel: "info"
-authTokenRealm: "https://gitlab.example.com/jwt/auth"
+authTokenRealm: "https://gitlab.devopsedu.com/jwt/auth"
 authTokenService: "container_registry"
 authTokenIssuer: "gitlab-issuer"
 storageDeleteEnabled: "true"
@@ -34,7 +34,7 @@ ingress:
   ## Must be provided if Ingress is enabled
   ##
   # hosts:
-  #  - gitlab.example.com
+  #  - gitlab.devopsedu.com
 
   # secretName: gitlab-server-tls
 
