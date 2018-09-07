@@ -3,8 +3,8 @@ apiVersion: v1
 metadata:
   name: ldapdataclaim
 spec:
-{{- if .Values.storage_class_name_ldap }}
-  storageClassName: {{ .Values.storage_class_name_ldap | quote }}
+{{- if .Values.OpenLdap.storage_class_name_ldap }}
+  storageClassName: {{ .Values.OpenLdap.storage_class_name_ldap | quote }}
 {{- end }}
   accessModes:
     - ReadWriteOnce
@@ -17,8 +17,8 @@ apiVersion: v1
 metadata:
   name: sldapdataclaim
 spec:
-{{- if .Values.storage_class_name_sldap }}
-  storageClassName: {{ .Values.storage_class_name_sldap | quote }}
+{{- if .Values.OpenLdap.storage_class_name_sldap }}
+  storageClassName: {{ .Values.OpenLdap.storage_class_name_sldap | quote }}
 {{- end }}
   accessModes:
     - ReadWriteOnce
