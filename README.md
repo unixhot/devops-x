@@ -17,7 +17,7 @@
 
 ### 1.准备Kubernetes集群
 
-1. 请参考自动化的部署https://github.com/unixhot/salt-kubernetes
+1. 请参考自动化的部署<a target="view_window"></a>[链接](https://github.com/unixhot/salt-kubernetes)
 2. 三台虚拟机建议的最小内存是4G，内存过低会导致Pod无法调度。
 3. DevOps-X会安装CoreDNS、Dashboard、Heapster、Ingress，只需要部署好Kubernetes集群即可。
 3. 目前在Helm中配置的镜像地址为registry.devopsedu.com，所以需要在所有节点设置hosts解析。
