@@ -40,9 +40,9 @@ ingress:
   ## Must be provided if Ingress is enabled
   ##
   # hosts:
-  #  - gitlab.example.com
+  #  - gitlab.devopsedu.com
   hosts:
-    - gitlab.example.com
+    - gitlab.devopsedu.com
 
   ## Gitlab Ingress TLS configuration
   ## Secrets must be manually created in the namespace
@@ -50,7 +50,7 @@ ingress:
   # tls:
   #   - secretName: gitlab-server-tls
   #     hosts:
-  #       - gitlab.example.com
+  #       - gitlab.devopsedu.com
 
 
 ## Configure resource requests and limits
@@ -128,9 +128,9 @@ minio:
 
 config:
   DEBUG: "false"
-  # GITLAB_ROOT_EMAIL: "admin@example.com"
+  # GITLAB_ROOT_EMAIL: "admin@devopsedu.com"
   # GITLAB_ROOT_PASSWORD: ""
-  # GITLAB_HOST: gitlab.example.com
+  # GITLAB_HOST: gitlab.devopsedu.com
   GITLAB_PORT: 80
   GITLAB_HTTPS: "false"
   GITLAB_SSH_PORT: "22"
@@ -140,7 +140,7 @@ config:
 runner:
   enabled: false
   ## Host value for gitlabUrl should be the same as config.GITLAB_HOST
-  gitlabUrl: "https://gitlab.example.com/ci/"
+  gitlabUrl: "https://gitlab.devopsedu.com/ci/"
   ## registrationToken should be the same as config GITLAB_SHARED_RUNNERS_REGISTRATION_TOKEN
   ## for the fresh systems
   registrationToken: "4CAi770WqUUVgYzyGmeS0PbGqcpTKl8XLVZfRZom"

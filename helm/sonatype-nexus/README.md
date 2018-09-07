@@ -118,7 +118,7 @@ If `nexusProxy.env.cloudIamAuthEnabled` is set to `true` the following variables
 | `nexusProxy.env.clientId`        | GCP OAuth client ID                | `nil`                                                |
 | `nexusProxy.env.clientSecret`    | GCP OAuth client Secret            | `nil`                                                |
 | `nexusProxy.env.organizationId`  | GCP organization ID                | `nil`                                                |
-| `nexusProxy.env.redirectUrl`     | OAuth callback url. example `https://nexus.example.com/oauth/callback` | `nil`            |
+| `nexusProxy.env.redirectUrl`     | OAuth callback url. example `https://nexus.devopsedu.com/oauth/callback` | `nil`            |
 | `nexusProxy.secrets.keystore`    | base-64 encoded value of the keystore file needed for the proxy to sign user tokens. Example: cat keystore.jceks &#124; base64 | `nil`  |
 | `nexusProxy.secrets.password`    | Password to the Java Keystore file | `nil`                                                |
 
@@ -147,8 +147,8 @@ As a minimum for running in production, the following settings are advised:
 ```yaml
 nexusProxy:
   env:
-    nexusDockerHost: container.example.com
-    nexusHttpHost: nexus.example.com
+    nexusDockerHost: container.devopsedu.com
+    nexusHttpHost: nexus.devopsedu.com
 
 nexusBackup:
   env:

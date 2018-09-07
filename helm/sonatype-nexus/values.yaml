@@ -47,8 +47,8 @@ nexusProxy:
   imagePullPolicy: IfNotPresent
   port: 8080
   env:
-    nexusDockerHost: container.example.com
-    nexusHttpHost: nexus.example.com
+    nexusDockerHost: container.devopsedu.com
+    nexusHttpHost: nexus.devopsedu.com
     enforceHttps: false
     cloudIamAuthEnabled: false
 ## If cloudIamAuthEnabled is set to true uncomment the variables below and remove this line

@@ -22,7 +22,7 @@
 
 ### 1.准备Kubernetes集群
 
-1. 请参考自动化的部署https://github.com/unixhot/salt-kubernetes
+1. 请参考自动化的部署[https://github.com/unixhot/salt-kubernetes](https://github.com/unixhot/salt-kubernetes)
 2. 三台虚拟机建议的最小内存是4G，内存过低会导致Pod无法调度。
 3. DevOps-X会安装CoreDNS、Dashboard、Heapster、Ingress，只需要部署好Kubernetes集群即可。
 3. 目前在Helm中配置的镜像地址为registry.devopsedu.com，所以需要在所有节点设置hosts解析。
@@ -70,12 +70,12 @@ edgenode="192.168.56.12"
 将192.168.56.12 替换为edgeNode IP。
 C:\Windows\System32\drivers\etc\hosts
 ```
-192.168.56.12  jenkins.example.com
-192.168.56.12  sonar.example.com
-192.168.56.12  gitlab.example.com
-192.168.56.12  nexus.example.com
-192.168.56.12  redmine.example.com
-192.168.56.12  ldapadmin.example.com
+192.168.56.12  jenkins.devopsedu.com
+192.168.56.12  sonar.devopsedu.com
+192.168.56.12  gitlab.devopsedu.com
+192.168.56.12  nexus.devopsedu.com
+192.168.56.12  redmine.devopsedu.com
+192.168.56.12  ldapadmin.devopsedu.com
 ```
 
 ### 6.查看访问详情

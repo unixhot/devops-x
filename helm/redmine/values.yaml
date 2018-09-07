@@ -31,7 +31,7 @@ redmineUsername: user
 ## Admin email
 ## ref: https://github.com/bitnami/bitnami-docker-redmine/#environment-variables
 ##
-redmineEmail: user@example.com
+redmineEmail: user@devopsedu.com
 
 ## Redmine default data language
 ## ref: https://github.com/bitnami/bitnami-docker-redmine/#environment-variables
@@ -147,7 +147,7 @@ serviceLoadBalancerSourceRanges:
 
 ingress:
   enabled: true
-  hostname: redmine.example.com
+  hostname: redmine.devopsedu.com
   annotations:
     # kubernetes.io/ingress.class: nginx
     # ingress.kubernetes.io/whitelist-source-range: "10.0.0.0/24,172.10.0.1"
