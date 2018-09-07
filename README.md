@@ -13,6 +13,9 @@
 
   ![架构图](https://github.com/unixhot/devops-x/blob/master/docs/devops-x.png)
 
+## 演示环境
+    本项目演示环境资源由京东云赞助！ 京东云-预见无限可能  https://www.jdcloud.com/ 
+
 ## DevOps-X 部署
 
 ### 1.准备Kubernetes集群
