@@ -1,5 +1,5 @@
 OpenLdap:
-  Image: "docker.io/osixia/openldap"
+  Image: "registry.devopsedu.com:5000/devops/openldap"
   ImageTag: "1.2.0"
   ImagePullPolicy: "Always"
   Component: "openldap"
@@ -31,7 +31,7 @@ OpenLdap:
   storage_class_name_ldap: "nfs-dynamic-class"
 
 PhpLdapAdmin:
-  Image: "docker.io/osixia/phpldapadmin"
+  Image: "registry.devopsedu.com:5000/devops/phpldapadmin"
   ImageTag: "0.6.12"
   ImagePullPolicy: "Always"
   Component: "phpadmin"
