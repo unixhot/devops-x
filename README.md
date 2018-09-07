@@ -3,10 +3,11 @@
 - 使用SaltStack进行基础设施自动化
 - 使用NFS/Ceph进行数据存储
 - 使用Helm管理所有应用
+- 使用OpenLDAP进行统一认证和登录
 
 ## 版本明细 v1.0 Beta
 
-- 集成Redmine、Gitlab、Jenkins、SonarQube、Nexus
+- 集成Redmine、Gitlab、Jenkins、SonarQube、Nexus、OpenLDAP
 - 目前测试通过系统CentOS 7.4，Kubernetes版本v1.10.3
 
 ## 案例架构图
