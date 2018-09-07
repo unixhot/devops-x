@@ -117,7 +117,7 @@ tiller_install(){
         tiller_status=$(kubectl get pod -n kube-system|grep "tiller"|awk '{print $3}')
         wait_time=$(($wait_time+5))
     done
-    if [ "$tiiler_status" == "Running" ];then
+    if [ "$tiller_status" == "Running" ];then
        green_color "Tiller install ok in $wait_time seconds"
     else
        red_color "Tiller install failed"
