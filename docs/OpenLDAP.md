@@ -173,7 +173,7 @@ sonarProperties: |
 
 在Jenkins页面打开”系统管理“中的"全局安全配置"，然后“启用安全”中 配置LDAP
 
-![参考如图](/Users/dinna/Downloads/jenkins-ldap-config-01.png)
+![参考如图](https://github.com/DINNAS/devops-x/blob/master/docs/jenkins-ldap-config-01.png)
 
 配置Server
 ```
