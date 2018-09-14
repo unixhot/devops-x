@@ -99,15 +99,15 @@ plugins:
 sonarProperties: |
   sonar.security.realm=LDAP
   ldap.url=ldap://openldap.default.svc.cluster.local:389
-  ldap.bindDn=cn=admin,dc=example,dc=com
+  ldap.bindDn=cn=admin,dc=devopsedu,dc=com
   ldap.bindPassword=admin
 
-  ldap.user.baseDn=ou=users,dc=example,dc=com
+  ldap.user.baseDn=ou=users,dc=devopsedu,dc=com
   ldap.user.request=(&(objectClass=inetOrgPerson)(uid={login}))
   ldap.user.realNameAttribute=cn
   ldap.user.emailAttribute=mail
 
-  ldap.group.baseDn=ou=groups,dc=example,dc=com
+  ldap.group.baseDn=ou=devopsx,dc=devopsedu,dc=com
   ldap.group.request=(&(objectClass=posixGroup)(memberUid={uid}))
 
 
