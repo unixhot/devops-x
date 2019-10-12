@@ -108,4 +108,5 @@ C:\Windows\System32\drivers\etc\hosts
 ### Git演示
 
 - 拉取代码并编写，上传代码。
+- 启用Deploy Key
 
