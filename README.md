@@ -90,15 +90,15 @@ C:\Windows\System32\drivers\etc\hosts
 
 ## Gitlab演示
 
-### 演示用户
-
-- 张三   zhangsan-dev  zhangsan@example.com  开发工程师
-- 李四   lisi-master   lisi@example.com  开发经理
-
 ### 演示项目
 
 - 创建一个Group：devops
-- 创建一个项目： devops-demo
+- 创建一个Project： devops-demo
+
+### 演示用户
+
+- 张三   用户名：zhangsan-dev  zhangsan@example.com  开发工程师
+- 李四   用户名：lisi-master   lisi@example.com  开发经理
 
 ### 权限分配
 
