@@ -14,11 +14,6 @@
 
   ![架构图](https://github.com/unixhot/devops-x/blob/master/docs/devops-x.png)
 
-## 演示环境
-
-  - 本项目演示环境资源由京东云赞助！ 京东云-预见无限可能  https://www.jdcloud.com/ 
-  - 演示环境地址 (预计10月1日对外) http://x.devopsedu.com
-
 ## DevOps-X 部署
 
 ### 1.准备Kubernetes集群
@@ -91,8 +86,26 @@ C:\Windows\System32\drivers\etc\hosts
 
 ```
 
-### 培训教学
+# DevOps 演示案例
 
-- 目前DevOps学院已经上线《基于Kubernetes构建企业容器云》的【入门实战篇】和【进阶提高篇】
-- 【DevOps学院】 http://www.devopsedu.com/
+## Gitlab演示
+
+### 演示用户
+
+- 张三   zhangsan-dev  zhangsan@example.com  开发工程师
+- 李四   lisi-master   lisi@example.com  开发经理
+
+### 演示项目
+
+- 创建一个Group：devops
+- 创建一个项目： devops-demo
+
+### 权限分配
+
+- 将张三分配到devops-demo项目，角色Developer
+- 将李四分配到devops-demo项目，角色Master
+
+### Git演示
+
+- 拉取代码并编写，上传代码。
 
