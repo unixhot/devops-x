@@ -110,3 +110,16 @@ C:\Windows\System32\drivers\etc\hosts
 - 拉取代码并编写，上传代码。
 - 启用Deploy Key
 
+1. 使用张三登录
+
+ - 生成证书  ssh-keygen -t rsa
+ - 将证书添加到Gitlab上  cat .ssh/id_rsa.pub
+
+2. 启用Deploy Key
+
+### Gitlab演示
+
+1. 创建Milestones，例如每个Sprint对应一个Milestone。创建v0.1
+2. 创建Issue，可以使用Issue模版，格式化Issue描述信息。 选择Milestone
+3. 创建Boards，通过KANBAN管理进度。
+
