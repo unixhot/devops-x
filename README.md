@@ -182,6 +182,33 @@ node {
 - 自动化部署测试环境
 - 自动化测试
 
+```
+node {
+    stage('拉取代码'){
+        echo "Code Pull"
+    }
+    stage('单元测试'){
+        echo "Unit Test"
+        sh '/usr/local/maven/bin/mvn test'
+    }
+    stage('构建打包'){
+        sh '/usr/local/maven/bin/mvn clean package'
+    }
+    stage('上传到制品库'){
+         echo 'SonarQube'
+    }
+    stage('部署审核'){
+         echo 'SonarQube'
+    }
+    stage('自动化部署到测试环境'){
+         echo 'SonarQube'
+    }
+    stage('自动化测试'){
+         echo 'SonarQube'
+    }
+}
+```
+
 ### 部署阶段
 
 * 目标：部署代码到对应的环境上
