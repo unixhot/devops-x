@@ -123,3 +123,40 @@ C:\Windows\System32\drivers\etc\hosts
 2. 创建Issue，可以使用Issue模版，格式化Issue描述信息。 选择Milestone
 3. 创建Boards，通过KANBAN管理进度。
 
+
+### Commit Stage 提交阶段：
+
+* 目标：每次提交都可以进行单元测试、编译、质量扫描
+
+* 触发条件：开发人员Push代码到Gitlab
+
+* 步骤：
+
+- 拉取代码
+- 单元测试
+- 代码编译
+- 质量扫描
+
+node {
+    stage('拉取代码'){
+        echo "Code Pull"
+    }
+    stage('单元测试'){
+        echo "Unit Test"
+        sh '/usr/local/maven/bin/mvn test'
+    }
+    stage('代码编译'){
+        sh '/usr/local/maven/bin/mvn compile'
+    }
+    stage('质量扫描'){
+         echo 'SonarQube'
+    }
+}
+
+
+
+
+
+
+
+
