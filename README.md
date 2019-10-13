@@ -137,6 +137,7 @@ C:\Windows\System32\drivers\etc\hosts
 - 代码编译
 - 质量扫描
 
+```
 node {
     stage('拉取代码'){
         echo "Code Pull"
@@ -152,7 +153,7 @@ node {
          echo 'SonarQube'
     }
 }
-
+```
 
 
 
