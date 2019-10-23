@@ -192,7 +192,8 @@ node {
         sh '/usr/local/maven/bin/mvn test'
     }
     stage('构建打包'){
-        sh '/usr/local/maven/bin/mvn clean package'
+        echo "Build"
+        //sh '/usr/local/maven/bin/mvn clean package'
     }
     stage('上传到制品库'){
          echo 'SonarQube'
