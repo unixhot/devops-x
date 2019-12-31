@@ -1,10 +1,41 @@
 ## DevOps-X with OpenLDAP
 
-## Custom OpenLDAP for Product 
+### 写在前面的话
 
-*注意： 以下配置是在执行DevOps-X工具链安装前配置的*
+DevOps-X 中使用到的组件对接OpenLDAP的方式不尽相同，有的可以通过安装前的配置定义即可对接上，而有的组件是内置对接OpenLDAP功能的，这部分组件就需要在安装完成后在相应页面进行配置修改。
 
-1. 自定义OpenLDAP配置
+* Gitlab、Sonarqube需安装前配置对接OpenLDAP
+* Jenkins、Redmine、Nexus需安装后页面配置OpenLDAP
+
+### 详细配置过程
+
+--- 
+安装前配置
+
+* 自定义OpenLDAP配置
+* Gitlab配置OpenLDAP
+* Sonarqube配置OpenLDAP
+* Jenkins配置OpenLDAP插件
+
+DevOps-X安装
+
+安装后配置
+
+* Jenkins配置对接OpenLDAP
+* Redmine配置对接OpenLDAP
+* Nexus  配置对接OpenLDAP
+
+OpenLDAP用户创建
+
+* 用户创建
+
+<br>
+
+### 安装前配置
+---
+
+**自定义OpenLDAP配置**
+
 
 修改文件`devops-x/helm/openldap/values.yaml`
 
@@ -30,9 +61,21 @@ PhpLdapAdmin:
       - ldapadmin.devopsedu.com   ## phpldapadmin访问域名
 ```
 
-修改完之后，保存
+修改完之后，保存。
 
-2. 配置Gitlab对接OpenLDAP
+`使用上述openldap配置后生成的配置信息如下`
+
+```
+LDAP_HOST: openldap.default.svc.cluster.local
+LDAP_PORT: 389
+LDAP_BIND_DN: "cn=admin,dc=devopsedu,dc=com"
+LDAP_PASS: "admin"
+LDAP_BASE: "dc=devopsedu,dc=com"
+```
+
+<br>
+
+**Gitlab配置OpenLDAP**
 
 修改文件`devops-x/helm/gitlab/values.yaml`
 
@@ -60,7 +103,9 @@ config:
 
 修改完之后，保存
 
-3. 配置SonarQube对接OpenLDAP
+<br>
+
+**Sonarqube配置OpenLDAP**
 
 修改文件`devops-x/helm/sonarqube/values.yaml`
 
@@ -90,7 +135,9 @@ sonarProperties: |
 
 修改完之后，保存
 
-4. 配置Jenkins对接OpenLDAP 
+<br>
+
+**Jenkins配置OpenLDAP插件** 
 
 修改文件`devops-x/helm/jenkins/values.yaml`
 
@@ -110,20 +157,59 @@ sonarProperties: |
   ...
 ```
 
-详细配置请参考：[Jenkins配置LDAP链接](https://wiki.jenkins.io/display/JENKINS/LDAP+Plugin)
+<br>
 
-5. 配置Redmine 和 Sonatype-nexus对接OpenLDAP
+### DevOps-X安装
+---
 
-由于应用本身已支持配置OpenLDAP ,因此，在页面直接添加OpenLDAP 相关配置 即可。
+请[返回首页](https://github.com/unixhot/devops-x)开始你的Devops-X安装
 
-6. 新增LDAP用户
+<br>
+
+### 安装后配置
+---
+
+**Jenkins配置对接OpenLDAP**
+
+在Jenkins页面打开”系统管理“中的"全局安全配置"，然后“启用安全”中 配置LDAP
+
+![参考如图](https://github.com/DINNAS/devops-x/blob/master/docs/jenkins-ldap-config-01.png)
+
+配置Server
+```
+ldap://openldap.default.svc.cluster.local:389
+```
+此处根据上述配置，使用默认端口389.
+
+配置root DN
+```
+dc=devopsedu,dc=com
+```
+
+配置User search filter
+```
+uid={0}
+```
+
+配置Manager DN
+```
+cn=admin,dc=devopsedu,dc=com
+```
+
+配置Manager Password
+```
+admin
+```
+
+其他配置按照需求填写，以上配置详细解释，参照[Jenkins链接](https://wiki.jenkins.io/display/JENKINS/LDAP+Plugin)
+
+上述配置完毕后，既可以在“安全组”中添加OpenLDAP中的用户到Jenkins中。
+
+2. Redmine配置对接OpenLDAP
+
+
+3. Nexus  配置对接OpenLDAP
 
 请参考：`devops-x/helm/openldap/README.md` 中 TEST 部分。
 
-
-## 开始安装
-
-在上述配置完成后，即可开始安装DevOpx-X 工具链
-
-**请开始你的安装** 
 

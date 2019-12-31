@@ -139,13 +139,13 @@ config:
   LDAP_UID: "uid"
   LDAP_METHOD: "plain"
   LDAP_VERIFY_SSL: "false"
-  LDAP_BIND_DN: "cn=admin,dc=example,dc=com"
+  LDAP_BIND_DN: "cn=admin,dc=devopsedu,dc=com"
   LDAP_PASS: "admin"
   LDAP_TIMEOUT: "10"
   LDAP_ACTIVE_DIRECTORY: "false"
   LDAP_ALLOW_USERNAME_OR_EMAIL_LOGIN: "false"
   LDAP_BLOCK_AUTO_CREATED_USERS: "false"
-  LDAP_BASE: "dc=example,dc=com"
+  LDAP_BASE: "dc=devopsedu,dc=com"
   LDAP_USER_FILTER: ""
 
 
